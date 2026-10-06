@@ -1,0 +1,42 @@
+{
+  "train_size": 4944,
+  "replayed_events": 1233,
+  "replayed_malicious": 373,
+  "replayed_benign": 860,
+  "train_seconds": 85.70369442399988,
+  "throughput_events_per_s": 9.909687975372549,
+  "latency_ms": {
+    "mean": 100.60304136253042,
+    "median": 90.66,
+    "p95": 144.27599999999978,
+    "max": 659.35
+  },
+  "tier_counts": {
+    "benign": {
+      "ALLOW": 851,
+      "ALERT": 7,
+      "CONTAIN": 2
+    },
+    "malicious": {
+      "CONTAIN": 178,
+      "ISOLATE": 162,
+      "ALERT": 22,
+      "ALLOW": 11
+    }
+  },
+  "malicious_contained_rate": 0.9115281501340483,
+  "malicious_alerted_or_higher_rate": 0.9705093833780161,
+  "benign_contained_rate": 0.002325581395348837,
+  "benign_alert_rate": 0.00813953488372093,
+  "isolations_pending_analyst": 162,
+  "attack_techniques_in_contained_events": {
+    "T1059.001": 187,
+    "T1620": 175,
+    "T1055": 174,
+    "T1105": 134,
+    "T1027": 116,
+    "T1562.001": 36,
+    "T1003.001": 2
+  },
+  "mean_actions_per_contained_event": 5.409356725146199
+}

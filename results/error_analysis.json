@@ -1,0 +1,72 @@
+{
+  "false_positive": {
+    "count": 30,
+    "median_length": 47580,
+    "mean_indicator_groups": 3.13,
+    "share_with_no_indicator": 0.067,
+    "group_presence": {
+      "exec_dynamic": 0.333,
+      "download": 0.167,
+      "encoding": 0.567,
+      "win32_api": 0.633,
+      "defense_evasion": 0.2,
+      "persistence": 0.133,
+      "credential": 0.1,
+      "network_socket": 0.3,
+      "reflection": 0.7
+    }
+  },
+  "false_negative": {
+    "count": 72,
+    "median_length": 3320,
+    "mean_indicator_groups": 1.36,
+    "share_with_no_indicator": 0.208,
+    "group_presence": {
+      "exec_dynamic": 0.167,
+      "download": 0.069,
+      "encoding": 0.278,
+      "win32_api": 0.125,
+      "defense_evasion": 0.111,
+      "persistence": 0.056,
+      "credential": 0.028,
+      "network_socket": 0.083,
+      "reflection": 0.444
+    }
+  },
+  "true_positive": {
+    "count": 1803,
+    "median_length": 2279,
+    "mean_indicator_groups": 2.22,
+    "share_with_no_indicator": 0.002,
+    "group_presence": {
+      "exec_dynamic": 0.306,
+      "download": 0.23,
+      "encoding": 0.181,
+      "win32_api": 0.713,
+      "defense_evasion": 0.067,
+      "persistence": 0.007,
+      "credential": 0.003,
+      "network_socket": 0.002,
+      "reflection": 0.716
+    }
+  },
+  "true_negative": {
+    "count": 4272,
+    "median_length": 2123,
+    "mean_indicator_groups": 0.32,
+    "share_with_no_indicator": 0.774,
+    "group_presence": {
+      "exec_dynamic": 0.088,
+      "download": 0.058,
+      "encoding": 0.043,
+      "win32_api": 0.008,
+      "defense_evasion": 0.022,
+      "persistence": 0.006,
+      "credential": 0.0,
+      "network_socket": 0.006,
+      "reflection": 0.093
+    }
+  },
+  "false_negative_still_alerted_share": 0.458,
+  "false_positive_contained_share": 0.4
+}

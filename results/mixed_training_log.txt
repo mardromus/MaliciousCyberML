@@ -1,0 +1,34 @@
+[mixed-aware] fold 1/5
+[mixed-aware] fold 2/5
+[mixed-aware] fold 3/5
+[mixed-aware] fold 4/5
+[mixed-aware] fold 5/5
+{
+ "augmented_training_samples_per_fold": [
+  2644,
+  2846,
+  2861,
+  1915,
+  2688
+ ],
+ "mixed_detection_rate": {
+  "Handcrafted + LR": 0.9409448818897638,
+  "Handcrafted + RF": 0.9660433070866141,
+  "Handcrafted + HGB": 0.9739173228346457,
+  "Char TF-IDF + LR": 0.9207677165354331,
+  "Ensemble (TF-IDF LR + RF)": 0.9643208661417323
+ },
+ "mixed_alert_or_higher_rate": {
+  "Handcrafted + LR": 0.9729330708661418,
+  "Handcrafted + RF": 0.9854822834645669,
+  "Handcrafted + HGB": 0.9758858267716536,
+  "Char TF-IDF + LR": 0.9608759842519685,
+  "Ensemble (TF-IDF LR + RF)": 0.9827755905511811
+ },
+ "n_mixed_evaluated": 4064
+}
+Handcrafted + LR {'f1': 0.9348, 'precision': 0.9186, 'recall': 0.9515, 'fpr': np.float64(0.0367), 'tpr_at_fpr_1pct': 0.8976}
+Handcrafted + RF {'f1': 0.9598, 'precision': 0.965, 'recall': 0.9547, 'fpr': np.float64(0.0151), 'tpr_at_fpr_1pct': 0.9467}
+Handcrafted + HGB {'f1': 0.9595, 'precision': 0.9644, 'recall': 0.9547, 'fpr': np.float64(0.0153), 'tpr_at_fpr_1pct': 0.9424}
+Char TF-IDF + LR {'f1': 0.9692, 'precision': 0.9741, 'recall': 0.9643, 'fpr': np.float64(0.0112), 'tpr_at_fpr_1pct': 0.9621}
+Ensemble (TF-IDF LR + RF) {'f1': 0.9686, 'precision': 0.9756, 'recall': 0.9616, 'fpr': np.float64(0.0105), 'tpr_at_fpr_1pct': 0.9616}
