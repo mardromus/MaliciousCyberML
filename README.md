@@ -9,7 +9,8 @@ Cyber Security case study (Unit 4). The repository holds:
   - `response.py`: tiered response engine (ALLOW / ALERT / CONTAIN / ISOLATE) for Event ID 4104 records, with ATT&CK mapping, defanged IOCs, dry-run actions and a JSONL audit log
 - `experiments/` — scripts that produce every number and figure in the report
 - `results/` — metrics (`metrics.json`, `response_summary.json`), out-of-fold scores and figures
-- `report/main.tex` — the case study report as a single LaTeX file for Overleaf (figures drawn in LaTeX, references included); `report/main.pdf` is the compiled version
+- `report/main.tex` — the case study report as a LaTeX file for Overleaf (figures drawn in LaTeX, references included); `report/main.pdf` is the compiled version
+- `report/CaseStudyReport.docx` — Word version generated from `main.tex` by `report/build_docx.py`
 - `tests/` — unit tests
 
 ## Reproduce
@@ -25,17 +26,21 @@ python experiments/make_figures.py
 python -m pytest -q tests
 ```
 
-### Report on Overleaf
+### Report on Overleaf / Word
 
 Create a blank Overleaf project, replace its `main.tex` with `report/main.tex`
-and compile with pdfLaTeX (the default). No other files are required. Before
-submitting, fill in the group number, member names, roll numbers, faculty,
-department and institute in the title-page block near the top of `main.tex`,
+and compile with pdfLaTeX (the default). To show the institute logo on the
+title page, also upload the logo image as `sit_logo.png`; without it a
+placeholder box is shown. Fill in the group number on the title page,
 recompile, and download the PDF named after your group number, e.g. `G10.pdf`.
 
+The Word version is regenerated from the same source (needs pdfLaTeX and
+poppler for rendering figures); put `sit_logo.png` in `report/` first to embed
+the logo:
+
 ```bash
-# local build (TeX Live)
 latexmk -pdf -outdir=report report/main.tex
+python report/build_docx.py
 ```
 
 ## Safety notes
