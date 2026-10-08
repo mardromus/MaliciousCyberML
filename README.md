@@ -9,8 +9,7 @@ Cyber Security case study (Unit 4). The repository holds:
   - `response.py`: tiered response engine (ALLOW / ALERT / CONTAIN / ISOLATE) for Event ID 4104 records, with ATT&CK mapping, defanged IOCs, dry-run actions and a JSONL audit log
 - `experiments/` — scripts that produce every number and figure in the report
 - `results/` — metrics (`metrics.json`, `response_summary.json`), out-of-fold scores and figures
-- `report/main.tex` — the report as a single self-contained LaTeX file for Overleaf (figures drawn with TikZ/pgfplots, bibliography embedded); `report/main.pdf` is the compiled version
-- `report/update_plot_data.py` — refreshes the plot data embedded in `main.tex` from `results/` and orders the references by first citation
+- `report/main.tex` — the case study report as a single LaTeX file for Overleaf (figures drawn in LaTeX, references included); `report/main.pdf` is the compiled version
 - `tests/` — unit tests
 
 ## Reproduce
@@ -24,8 +23,6 @@ python experiments/simulate_response.py --data data/mpsd
 python experiments/error_analysis.py --data data/mpsd
 python experiments/make_figures.py
 python -m pytest -q tests
-
-python report/update_plot_data.py            # only needed if results change
 ```
 
 ### Report on Overleaf

@@ -3,93 +3,71 @@
 %%  AI-Powered Detection and Automated Response to Malicious PowerShell
 %%  Attacks Using Machine Learning
 %%
-%%  Single-file Overleaf project: all figures are drawn with TikZ/pgfplots
-%%  and the bibliography is embedded, so no other files are needed.
-%%  Compiler: pdfLaTeX (Overleaf default).
-%%
-%%  Before submission: edit the group number, member names, roll numbers,
-%%  faculty, department and institute in the "Title page" block below,
-%%  recompile, and save the PDF as G<group number>.pdf (e.g. G10.pdf).
+%%  Single-file Overleaf project (compile with pdfLaTeX). Before submitting,
+%%  fill in the group number, names and roll numbers on the title page and
+%%  save the PDF as G<group number>.pdf (for example, G10.pdf).
 %% =====================================================================
 \documentclass[12pt,a4paper]{article}
 
-% ---------- fonts and page layout ----------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern}                  % scalable fonts for monospace text
-\usepackage{mathptmx}                 % Times for text and mathematics
+\usepackage{lmodern}
+\usepackage{mathptmx}                 % Times font
 \usepackage[a4paper,margin=2.54cm]{geometry}
 \usepackage{setspace}
-\setstretch{1.2}
+\setstretch{1.3}
 \usepackage{microtype}
-\usepackage{amsmath,amssymb}
-\usepackage{array,booktabs,tabularx,multirow}
+\usepackage{amsmath}
+\usepackage{array,booktabs,tabularx}
 \usepackage{enumitem}
 \setlist{itemsep=2pt,topsep=4pt}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
 \usepackage{cite}
 
-% ---------- colours: black text, blue accents only ----------
-\usepackage[table]{xcolor}
+\usepackage{xcolor}
 \definecolor{navy}{HTML}{0D366B}
 \definecolor{midblue}{HTML}{2A78D6}
-\definecolor{lightblue}{HTML}{86B6EF}
 \definecolor{paleblue}{HTML}{DCE7F5}
 
-% ---------- headings ----------
 \usepackage{titlesec}
 \titleformat{\section}{\normalfont\Large\bfseries\color{navy}}{\thesection}{0.7em}{}
 \titleformat{\subsection}{\normalfont\large\bfseries\color{navy}}{\thesubsection}{0.7em}{}
-\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape\color{navy}}{\thesubsubsection}{0.7em}{}
-\titlespacing*{\section}{0pt}{16pt plus 4pt minus 2pt}{8pt plus 2pt}
-\titlespacing*{\subsection}{0pt}{12pt plus 3pt minus 2pt}{5pt plus 2pt}
 
-% ---------- captions ----------
 \usepackage{caption}
-\captionsetup{font=normalsize,labelfont={bf,color=navy},labelsep=colon,justification=centering,skip=6pt}
+\captionsetup{font=normalsize,labelfont={bf,color=navy},labelsep=colon}
 \captionsetup[table]{position=top}
 
-% ---------- figures ----------
 \usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta,calc,fit}
+\usetikzlibrary{positioning,arrows.meta}
 \usepackage{pgfplots}
-\pgfplotsset{compat=1.17,
-  every axis/.append style={font=\small, axis line style={black!60}, tick style={black!60}},
-  every axis label/.append style={font=\small}, legend style={font=\small, draw=none, fill=none}}
+\pgfplotsset{compat=1.17}
 
-% ---------- links ----------
 \usepackage[hyphens]{url}
 \usepackage[colorlinks=true,linkcolor=navy,citecolor=navy,urlcolor=navy]{hyperref}
-\hypersetup{pdftitle={AI-Powered Detection and Automated Response to Malicious PowerShell Attacks Using Machine Learning},
-            pdfsubject={Cyber Security Case Study Report}}
 
 \newcommand{\attck}{ATT\&CK}
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
 
 \begin{document}
 
-%% =====================================================================
+%% ---------------------------------------------------------------------
 %%  Title page
-%% =====================================================================
+%% ---------------------------------------------------------------------
 \begin{titlepage}
   \centering
   \setstretch{1.15}
-  {\large\textsc{Cyber Security}\par}
-  {\normalsize Case Study Report (Unit 4)\par}
-  \vspace{2.2cm}
+  {\large\textbf{CYBER SECURITY}\par}
+  {Case Study Report (Unit 4)\par}
+  \vspace{2.5cm}
   {\LARGE\bfseries\color{navy} AI-Powered Detection and Automated Response to Malicious PowerShell Attacks Using Machine Learning\par}
-  \vspace{1.6cm}
+  \vspace{2cm}
   {\large\textbf{Group No.:} G\_\_\par}
   \vspace{0.6cm}
   \textbf{Topic Selected:} AI-Powered Detection and Automated Response to Malicious PowerShell Attacks Using Machine Learning\par
-  \vspace{1.4cm}
-  {\large\bfseries\color{navy} Submitted by\par}
+  \vspace{1.6cm}
+  {\large\bfseries\color{navy} Group Members\par}
   \vspace{0.3cm}
   \begin{tabular}{c l l}
     \toprule
-    \textbf{Sr. No.} & \textbf{Name of the Student} & \textbf{Roll / Enrolment No.}\\
+    \textbf{Sr. No.} & \textbf{Name of the Student} & \textbf{Roll No.}\\
     \midrule
     1 & [Student Name 1] & [Roll No.]\\
     2 & [Student Name 2] & [Roll No.]\\
@@ -97,557 +75,216 @@
     4 & [Student Name 4] & [Roll No.]\\
     \bottomrule
   \end{tabular}\par
-  \vspace{1.4cm}
-  {\large\bfseries\color{navy} Under the guidance of\par}
-  \vspace{0.2cm}
-  [Name of the Faculty / Course Coordinator]\par
   \vfill
-  [Department Name]\par
-  [Name of the Institute]\par
+  Submitted to: [Name of the Faculty]\par
+  [Department Name], [Name of the Institute]\par
   October 2026\par
 \end{titlepage}
 
-%% =====================================================================
-%%  Front matter
-%% =====================================================================
-\pagenumbering{roman}
-\setcounter{page}{2}
-
+%% ---------------------------------------------------------------------
 \section*{Abstract}
-\addcontentsline{toc}{section}{Abstract}
-PowerShell is installed by default on every supported version of Windows, and the capabilities that make it valuable to system administrators, namely direct access to the .NET runtime and Windows APIs, in-memory execution and remote management, also make it one of the most frequently abused tools in intrusions that ``live off the land''. Signature-based defences detect such scripts poorly, since a payload can be renamed, re-encoded or fragmented without any change in behaviour. This report presents the design, implementation and evaluation of a machine-learning pipeline that classifies PowerShell script blocks as malicious or benign and uses the resulting risk score to drive a tiered, automated response. The public MPSD corpus (4,202 malicious and 4,316 benign scripts) was first subjected to a data-quality audit, which showed that 55.2\% of the malicious files were exact duplicates, that 12 files carried both labels, and that byte-order marks occurred only in benign files. After cleaning, 1,875 malicious and 4,302 benign scripts remained, and the malicious scripts were found to belong to only 816 structural families. Character 3--5-gram TF-IDF features were combined with 33 interpretable statistical and behavioural indicators aligned with MITRE \attck{}, and logistic regression, random forest, histogram gradient boosting and a soft-voting ensemble were compared under family-aware five-fold cross-validation. The ensemble obtained an F1-score of 0.972 and a ROC-AUC of 0.998, detecting 97.4\% of malicious scripts at a false-positive rate of 1\%; a naive random split on the uncleaned data reported 98.8\% for the same measure. Malicious code embedded in long benign scripts emerged as the principal weakness (46.7\% detected), which improved to 96.4\% when comparable samples were added to training, at the cost of a modest increase in false positives. In a replay of 1,233 unseen scripts presented as Windows Event ID 4104 records, the response engine contained 91.2\% of malicious events, wrongly contained 0.23\% of benign events and required a median of 90.7\,ms per event. The results indicate that lightweight, interpretable models combined with a proportionate and human-supervised response policy offer a practical defence against PowerShell-based attacks.
+%% ---------------------------------------------------------------------
+PowerShell is a scripting tool that comes with every Windows computer. Attackers often use it because it is trusted, powerful and can run code directly in memory without leaving files on disk. Traditional antivirus tools that look for fixed signatures find it hard to catch such scripts, because an attacker can easily change the text of a script while keeping its behaviour the same. This case study builds and tests a machine-learning system that reads a PowerShell script, decides whether it is malicious, and then takes an automatic response based on how risky the script is. We used the public MPSD dataset of malicious and benign PowerShell scripts. While preparing the data we found that more than half of the malicious files were exact copies, so duplicates were removed before training. We compared four machine-learning models and a simple ensemble. The ensemble achieved an F1-score of 0.972 and correctly detected 96.2\% of malicious scripts while wrongly flagging only 0.7\% of benign scripts. When tested on scripts it had never seen, the automatic response system contained 91.2\% of malicious scripts and wrongly blocked only 0.23\% of benign ones, taking about 91 milliseconds per script. The study shows that simple, explainable machine-learning models combined with a careful response policy can help organisations defend against PowerShell attacks.
 
-\vspace{0.4cm}
-\noindent\textbf{\color{navy}Keywords:} PowerShell; malware detection; machine learning; living-off-the-land attacks; TF-IDF; random forest; ensemble learning; MITRE \attck{}; automated incident response; SOAR; Script Block Logging; AMSI.
+\vspace{0.3cm}
+\noindent\textbf{\color{navy}Keywords:} PowerShell, malware detection, machine learning, cyber attack, random forest, logistic regression, automated incident response, MITRE \attck{}.
 
 \clearpage
-{\hypersetup{linkcolor=black}
-\setstretch{1.1}
-\tableofcontents
-\listoffigures
-\listoftables}
-\clearpage
-\pagenumbering{arabic}
 
-%% =====================================================================
+%% ---------------------------------------------------------------------
 \section{Introduction}
-%% =====================================================================
+%% ---------------------------------------------------------------------
 
-\subsection{Background and Motivation}
-PowerShell is a command shell and scripting language built on the .NET runtime that has shipped with Windows since Windows~7 and Windows Server~2008~R2. Administrators rely on it for configuration management, Active Directory maintenance, software deployment and cloud automation. The same characteristics that make it useful for administration, in particular unrestricted access to .NET classes and Win32 APIs, the ability to execute code held only in memory and built-in remoting, are precisely those an adversary requires after obtaining an initial foothold. A short PowerShell command can retrieve a second-stage payload over HTTP, load it by reflection and execute it without writing an executable to disk. Such intrusions are commonly described as \emph{fileless} or \emph{living-off-the-land} attacks, because they rely on software that is already present and trusted on the host~\cite{wueest2017}.
+\subsection{Background}
+PowerShell is a command-line shell and scripting language made by Microsoft. It is installed by default on Windows and is used by system administrators to automate everyday tasks such as managing users, installing software and changing settings. Because it is so powerful and is already trusted on the system, attackers also like to use it. With a single PowerShell command, an attacker can download harmful code from the internet and run it directly in memory, without saving any file on the disk. This type of attack is called a \emph{fileless} or \emph{living-off-the-land} attack, because the attacker uses tools that are already present on the computer~\cite{wueest2017}.
 
-The problem is long-standing. As early as 2016, Symantec reported that 95.4\% of the PowerShell scripts submitted to the Blue Coat sandbox it analysed were malicious~\cite{wueest2016}. MITRE \attck{} catalogues the behaviour as sub-technique T1059.001~\cite{mitre_t1059}, and the 2025 Threat Detection Report of Red Canary identified Command and Scripting Interpreter as the most frequently observed \attck{} technique for the sixth consecutive year~\cite{redcanary2025}. Removing PowerShell altogether is not a realistic option. In June 2022, the US National Security Agency (NSA) and the Cybersecurity and Infrastructure Security Agency (CISA), together with the national cyber security centres of New Zealand and the United Kingdom, advised organisations to retain PowerShell and to configure and monitor it appropriately~\cite{nsa2022}. The recommended controls, which include Script Block Logging, the Antimalware Scan Interface (AMSI), constrained language mode and transcription, generate a large volume of useful telemetry. They do not, however, decide whether a particular script is hostile, and that decision must be taken quickly and at scale if an attack is to be interrupted before it achieves its objective. Machine learning (ML) is well suited to this decision.
+\subsection{Relevance of the Topic Today}
+PowerShell attacks are a serious and current problem. Symantec reported that 95.4\% of the PowerShell scripts submitted to its analysis service were malicious~\cite{wueest2016}. MITRE \attck{}, a well-known knowledge base of attacker behaviour, lists PowerShell as technique T1059.001~\cite{mitre_t1059}, and the 2025 Threat Detection Report by Red Canary found that command and scripting interpreters were the most common attack technique for the sixth year in a row~\cite{redcanary2025}. Simply removing PowerShell is not possible, because organisations depend on it. In 2022, the NSA and CISA advised organisations to keep PowerShell but to log and monitor it carefully~\cite{nsa2022}.
 
-\subsection{Relevance in the Current Threat Landscape}
-Several developments make an ML-based detection and response capability for PowerShell particularly relevant at present. Obfuscation has become inexpensive and automated: freely available frameworks such as Invoke-Obfuscation can transform a single command into a very large number of syntactically different but functionally equivalent variants~\cite{bohannon2016}, which defeats exact-match signatures while leaving statistical regularities that learned models can exploit~\cite{bohannon2017}. Security operations centres are also overloaded; endpoint products raise far more alerts than analysts can examine, and alert fatigue is a recognised cause of missed intrusions~\cite{hassan2019}. A calibrated risk score allows low-risk events to be handled automatically and concentrates analyst attention where it is most needed. Finally, generative AI has begun to influence both offence and defence. Large language models (LLMs) have been evaluated for de-obfuscating real malware droppers~\cite{patsakis2024} and for explaining why a PowerShell script is malicious~\cite{wang2026}, but their cost and latency mean that fast classical detectors remain necessary as a first-line filter. Current incident-response guidance further treats detection and response as an integral part of cybersecurity risk management~\cite{nist2025}, which favours systems that link a detector to a documented and auditable response policy.
+Logging, however, only collects data; someone still has to decide whether each script is safe or harmful. Attackers make this harder by disguising their scripts with free tools such as Invoke-Obfuscation~\cite{bohannon2016}, and security teams already receive more alerts than they can check~\cite{hassan2019}. Machine learning can help by automatically scoring every script and allowing a fast and consistent response, which is in line with current incident-response guidance~\cite{nist2025}.
 
 \subsection{Problem Statement}
-Given the text of a PowerShell script block captured on a Windows endpoint, the system should (i)~estimate the probability that the script is malicious with a false-positive rate that is acceptable in production, and (ii)~select a proportionate response automatically, ranging from logging the event to terminating the process and isolating the host, while leaving the most disruptive actions under human control. The solution should operate on static text only, because executing unknown scripts in order to observe their behaviour is slow and hazardous, and its evaluation should reflect performance on scripts that are genuinely new to the model.
+Given the text of a PowerShell script captured on a Windows computer, the system should (1) decide whether the script is malicious, with very few false alarms, and (2) automatically take a suitable action, such as raising an alert or blocking the script, while leaving the most serious actions to a human analyst.
 
 \subsection{Objectives}
-The objectives of this case study are:
 \begin{enumerate}
-  \item to audit a public labelled PowerShell corpus for duplicates, label conflicts and spurious artefacts before any model is trained;
-  \item to engineer features that capture both lexical patterns and behavioural intent, and to map the behavioural features to MITRE \attck{} techniques;
-  \item to train and compare several classifiers under an evaluation protocol that prevents near-duplicate scripts from appearing in both training and test data;
-  \item to design a policy-driven response engine that converts a risk score into graded actions and records every decision in an audit log; and
-  \item to measure detection quality, response outcomes and processing latency, and to analyse the limitations of the approach.
+  \item To prepare a clean and reliable dataset of malicious and benign PowerShell scripts.
+  \item To extract useful features from the scripts and train machine-learning models to detect malicious ones.
+  \item To compare the models and select the best one for detection.
+  \item To design an automated response system that acts according to the risk level of each script.
+  \item To test the complete system and discuss its strengths and limitations.
 \end{enumerate}
 
-\subsection{Contributions}
-This work contributes, first, a data-quality audit of the MPSD corpus~\cite{fang2021} that quantifies exact duplication, label conflicts and a byte-order-mark artefact that a classifier could exploit as a shortcut. Second, it introduces a family-aware evaluation protocol based on structural skeleton hashing, under which the 1,875 unique malicious scripts form 816 families and each family is confined to a single cross-validation fold. Third, it develops a hybrid detector that combines character n-gram TF-IDF features with 33 interpretable statistical and \attck{}-aligned behavioural indicators, and compares it with single-view baselines. Fourth, it identifies malicious code embedded in benign scripts as the main weakness of models trained on standalone samples and evaluates a leakage-free mitigation. Fifth, it implements a tiered response engine that consumes Windows Event ID 4104 records, attaches \attck{} context, plans containment actions and requires analyst approval before host isolation, and evaluates the complete detection-to-response loop on unseen data.
+%% ---------------------------------------------------------------------
+\section{Literature Review}
+%% ---------------------------------------------------------------------
 
-\subsection{Organisation of the Report}
-Section~\ref{sec:lit} reviews related work on PowerShell attack detection, de-obfuscation, evaluation methodology and automated response. Section~\ref{sec:method} describes the methodology, Section~\ref{sec:impl} the implementation, and Section~\ref{sec:results} presents and discusses the experimental results. Section~\ref{sec:conc} concludes the report and outlines future work.
-
-%% =====================================================================
-\section{Literature Review}\label{sec:lit}
-%% =====================================================================
-
-\subsection{PowerShell as an Attack Vector and Defensive Telemetry}
-From version 5.0 onwards, PowerShell includes several features intended for defenders. Script Block Logging records the text of every script block compiled by the PowerShell engine in the Microsoft-Windows-PowerShell/Operational log as Event ID 4104~\cite{ms_logging}. Because logging takes place at compilation time, code that is generated at run time, for example a string that is decoded and then passed to \texttt{Invoke-Expression}, is also recorded in its decoded form. AMSI allows any registered anti-malware engine to inspect a script buffer immediately before execution and to block it~\cite{ms_amsi}. Both mechanisms are recommended in the joint NSA/CISA guidance~\cite{nsa2022}. On the analysis side, the \attck{} knowledge base provides a common vocabulary for adversary tactics and techniques~\cite{strom2018}, and it is used in this work to describe what a detected script attempts to do. Industry reports have documented the abuse of PowerShell for almost a decade, describing its use for payload delivery, lateral movement and reconnaissance~\cite{wueest2016} and its central role in fileless attack techniques~\cite{wueest2017}; more recent reports continue to rank script interpreters among the most observed techniques~\cite{redcanary2025}.
+\subsection{PowerShell Logging and Attack Knowledge}
+Microsoft added security features to PowerShell that make detection possible. \emph{Script Block Logging} records the text of every script that runs as Windows Event ID 4104~\cite{ms_logging}, and the \emph{Antimalware Scan Interface} (AMSI) allows antivirus software to scan a script just before it runs~\cite{ms_amsi}. The MITRE \attck{} framework gives a common language to describe what an attacker is trying to do, such as downloading tools or stealing passwords~\cite{strom2018}. Security reports have described how attackers use PowerShell for downloading malware, moving across networks and staying hidden~\cite{wueest2016,wueest2017,redcanary2025}.
 
 \subsection{Obfuscation and De-obfuscation}
-Bohannon's Invoke-Obfuscation framework demonstrated how easily PowerShell can be disguised at the token, string, encoding and launcher levels~\cite{bohannon2016}. In response, Bohannon and Holmes developed Revoke-Obfuscation, which extracts approximately 4,000 features from the abstract syntax tree (AST) of a script and applies a linear model to determine whether it is obfuscated. They assembled a corpus of 408,000 scripts, of which about 7,000 were manually reviewed and labelled~\cite{bohannon2017}. Their work established that statistical properties of code are considerably more robust than string signatures.
+Attackers often disguise (obfuscate) their scripts. Bohannon showed that a single command can be rewritten in many different forms~\cite{bohannon2016}, and Bohannon and Holmes later built Revoke-Obfuscation, which detects disguised scripts using statistical features~\cite{bohannon2017}. Several tools try to remove the disguise before analysis, including PowerDrive~\cite{ugarte2019}, the method of Li et al.~\cite{li2019} and its extension by Xiong et al.~\cite{xiong2022}, PowerDP~\cite{tsai2023} and PowerPeeler~\cite{li2024}. Recently, Patsakis et al.\ tested large language models (LLMs) and found that GPT-4 could recover hidden web addresses from real malicious scripts in about 70\% of cases~\cite{patsakis2024}.
 
-A second line of research attempts to reverse obfuscation before detection. PowerDrive is a multi-stage static and dynamic de-obfuscator that removes obfuscation layers progressively and was used to analyse thousands of real attacks~\cite{ugarte2019}. Li et al.\ proposed a light-weight de-obfuscation technique based on AST subtrees, combined with semantic-aware attack detection~\cite{li2019}, which Xiong et al.\ later generalised~\cite{xiong2022}. PowerDP predicts the obfuscation types applied to a command, recovers the original content through targeted regular-expression replacement and profiles behaviour with multi-label classifiers~\cite{tsai2023}, whereas PowerPeeler performs dynamic de-obfuscation at the instruction level during execution~\cite{li2024}. Patsakis et al.\ evaluated LLMs on PowerShell droppers from the Emotet campaign and found that GPT-4 recovered the hidden download URLs in 69.56\% of cases~\cite{patsakis2024}. Taken together, these studies show that de-obfuscation improves detection but adds processing cost and complexity. In-engine telemetry such as Event ID 4104 already exposes a partially de-obfuscated view at no additional cost, and this is the input assumed in the present work.
+\subsection{Machine Learning for PowerShell Detection}
+Hendler et al.\ trained deep neural networks on more than 66,000 PowerShell commands and found that combining two different models gave the best results~\cite{hendler2018}. In later work they used AMSI data and reached a detection rate of nearly 90\% with less than 0.1\% false alarms~\cite{hendler2020}, and Microsoft described using such models in its Defender products~\cite{ms_blog2019}. Rusak et al.\ used the syntax tree of scripts~\cite{rusak2018}, Song et al.\ compared token-based and tree-based features and reported about 98\% detection~\cite{song2021}, and Mimura and Tajiri used word embeddings~\cite{mimura2021}. Fang et al.\ combined several types of features with a random forest, reported 98.93\% accuracy and released the MPSD dataset used in this study~\cite{fang2021}. Saxe and Berlin showed that character-level models work well for short security texts such as web addresses~\cite{saxe2017}. General reviews of machine learning for malware are given by Ucci et al.~\cite{ucci2019} and Gibert et al.~\cite{gibert2020}. The newest work uses LLMs to both detect and explain malicious PowerShell~\cite{wang2026}.
 
-\subsection{Machine-Learning-Based Detection}
-Hendler, Kels and Rubin conducted one of the first large-scale studies, training character-level convolutional and recurrent networks and a natural-language-processing (NLP) baseline on 66,388 commands collected by Microsoft~\cite{hendler2018}. Their best detector was an ensemble of the NLP model and a convolutional network, because each detected commands that the other missed. In subsequent work they used data obtained through AMSI and contextual embeddings pre-trained on a large unlabelled corpus, reaching a true-positive rate of nearly 90\% at a false-positive rate below 0.1\%~\cite{hendler2020}. Microsoft described the deployment of such deep models in its Defender products~\cite{ms_blog2019}.
-
-Other studies have explored alternative representations. Rusak et al.\ learned embeddings of AST nodes to classify malicious scripts by family~\cite{rusak2018}. Song et al.\ compared token-based and AST-based feature sets with both classical and deep models and reported detection rates of about 98\% after feature optimisation~\cite{song2021}. Mimura and Tajiri showed that word-embedding representations support purely static detection~\cite{mimura2021}. Fang et al.\ combined FastText embeddings with textual, token and AST-node features in a random forest, reporting 98.93\% accuracy on original scripts and 97.76\% on a harder set in which malicious code is inserted into benign scripts; they also released the MPSD dataset used in this study~\cite{fang2021}. Outside PowerShell, Saxe and Berlin showed that character-level models perform well on short security artefacts such as URLs, file paths and registry keys~\cite{saxe2017}. Broader surveys of ML for malware analysis are provided by Ucci et al.~\cite{ucci2019} and Gibert et al.~\cite{gibert2020}. The most recent direction uses LLMs not only to classify scripts but also to localise the responsible code and explain the verdict in natural language~\cite{wang2026}.
-
-\subsection{Methodological Pitfalls in Security Machine Learning}
-High reported accuracy does not guarantee practical value. Sommer and Paxson argued that intrusion detection differs from conventional ML tasks because errors are costly, labelled data are scarce and the environment changes continuously~\cite{sommer2010}. Arp et al.\ catalogued ten common pitfalls, including sampling bias, data snooping, spurious correlations and inappropriate performance measures, and confirmed in a study of 30 papers from leading security venues that these pitfalls are widespread~\cite{arp2022}. Pendlebury et al.\ demonstrated that random train/test splits which disregard time and realistic class ratios can substantially overstate the performance of malware classifiers~\cite{pendlebury2019}. For imbalanced problems, Saito and Rehmsmeier recommend complementing ROC analysis with precision-oriented measures~\cite{saito2015}. These findings shaped the evaluation design described in Section~\ref{sec:protocol}: duplicated and near-duplicated scripts constitute a form of data snooping, and the byte-order-mark artefact is a clear example of a spurious correlation.
-
-\subsection{Automated Incident Response}
-Security orchestration, automation and response (SOAR) platforms connect detection tools to response actions through playbooks. Islam et al.\ reviewed the academic and grey literature on security orchestration and identified the integration of heterogeneous tools and the automation of repetitive response tasks as its principal aims~\cite{islam2019}. NoDoze reduced false alarms by ranking alerts with the aid of provenance graphs~\cite{hassan2019}, and Hassan et al.\ subsequently showed that linking endpoint alerts into provenance graphs annotated with \attck{} tactics and techniques reduces false alarms and supports analyst triage~\cite{hassan2020}. NIST SP~800-61 Rev.~3 organises incident-response recommendations around the six Functions of the NIST Cybersecurity Framework~2.0 (Govern, Identify, Protect, Detect, Respond and Recover), treating response as part of overall risk management~\cite{nist2025}.
+\subsection{Evaluation Problems and Automated Response}
+Researchers have warned that machine-learning results in security can look better than they really are. Sommer and Paxson explained why intrusion detection is harder than normal classification tasks~\cite{sommer2010}. Arp et al.\ listed common mistakes, such as letting very similar samples appear in both training and test data~\cite{arp2022}, and Pendlebury et al.\ showed that careless data splitting can make malware detectors look much more accurate than they are~\cite{pendlebury2019}. On the response side, security orchestration and automation (SOAR) tools connect detection to automatic actions~\cite{islam2019}, and provenance-based methods help analysts deal with large numbers of alerts~\cite{hassan2019,hassan2020}.
 
 \subsection{Summary and Research Gap}
-Table~\ref{tab:lit} summarises representative studies. The literature shows that ML detectors can achieve high accuracy on PowerShell, that obfuscation-resistant statistical features are more valuable than exact strings, and that evaluation choices can substantially inflate reported results. Three gaps remain. Few studies audit their datasets for duplicates and artefacts before reporting results; most work ends at a classification score and does not address how that score should drive a safe automated response; and response decisions are seldom linked to interpretable evidence, such as \attck{} techniques, that an analyst can verify. The present study addresses all three.
+Table~\ref{tab:lit} summarises some important studies. Most previous work focuses only on detection and reports very high accuracy, but few studies check their datasets for duplicate samples, and very few connect the detection result to an automatic response. This case study addresses both points.
 
 \begin{table}[htbp]
 \centering
-\caption{Summary of representative related work}\label{tab:lit}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\caption{Summary of related work}\label{tab:lit}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{4.3cm}}
 \toprule
-\textbf{Study} & \textbf{Approach} & \textbf{Reported outcome} & \textbf{Limitation relevant here}\\
+\textbf{Study} & \textbf{Method} & \textbf{Result}\\
 \midrule
-Hendler et al.~\cite{hendler2018} & Character-level CNN/RNN and NLP ensemble & High recall at very low FPR on 66k commands & Proprietary data; detection only\\
-Hendler et al.~\cite{hendler2020} & AMSI data, pre-trained contextual embeddings & $\approx$90\% TPR at $<$0.1\% FPR & Requires large unlabelled corpus and GPU training\\
-Bohannon \& Holmes~\cite{bohannon2017} & AST features with a linear model & Robust obfuscation detection & Detects obfuscation rather than maliciousness\\
-Li et al.~\cite{li2019} & AST-subtree de-obfuscation and semantic detection & Recovers obfuscated scripts & Additional processing stage; no response\\
-Song et al.~\cite{song2021} & Token/AST feature optimisation & $\approx$98\% detection & Random splits; duplicates not analysed\\
-Fang et al.~\cite{fang2021} & FastText and hybrid features with RF & 98.93\% / 97.76\% accuracy & Duplicates in data not addressed\\
-Tsai et al.~\cite{tsai2023} & Obfuscation-type prediction and regex de-obfuscation & 98.11\% recovery over 15 types & Command level; no response\\
-Wang et al.~\cite{wang2026} & LLM classification and explanation & Natural-language explanations & Cost and latency of LLM inference\\
+Hendler et al.~\cite{hendler2018} & Deep neural networks on PowerShell commands & High detection, very few false alarms\\
+Hendler et al.~\cite{hendler2020} & AMSI data with pre-trained embeddings & About 90\% detection\\
+Bohannon \& Holmes~\cite{bohannon2017} & Statistical features to detect obfuscation & Robust obfuscation detection\\
+Song et al.~\cite{song2021} & Token and syntax-tree features & About 98\% detection\\
+Fang et al.~\cite{fang2021} & Hybrid features with random forest & 98.93\% accuracy\\
+Wang et al.~\cite{wang2026} & Large language models & Detection with explanations\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-%% =====================================================================
-\section{Methodology}\label{sec:method}
-%% =====================================================================
+%% ---------------------------------------------------------------------
+\section{Methodology}
+%% ---------------------------------------------------------------------
 
-\subsection{System Overview}
-Figure~\ref{fig:arch} outlines the proposed system. Script-block text is obtained from endpoint telemetry (Event ID 4104 or an AMSI buffer), cleaned and normalised, transformed into two complementary feature views and scored by a trained model. A policy engine maps the risk score and the behavioural evidence to a response tier, and the associated actions are executed (in this study, simulated) and logged. Analyst decisions are fed back into the labelled data used for periodic retraining. The offline part of the pipeline, comprising the data audit, model training, cross-validation and threshold selection, is described in Sections~\ref{sec:data}--\ref{sec:protocol}; the online response logic is described in Section~\ref{sec:policy}.
+\subsection{Overview}
+The proposed system works in six steps, shown in Figure~\ref{fig:flow}. First, the text of each PowerShell script is collected from Windows logs. The data is then cleaned, useful features are extracted, and a machine-learning model gives each script a risk score between 0 and 1. Finally, a response policy uses the score to choose an action, and every decision is recorded.
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[font=\small,
-  stage/.style={draw=navy, thick, rounded corners=3pt, fill=paleblue, align=center, minimum height=2.75cm, text width=2.45cm, inner sep=3pt},
-  lower/.style={draw=navy, thick, rounded corners=3pt, fill=white, align=center, minimum height=2.2cm, inner sep=3pt},
+  box/.style={draw=navy, thick, rounded corners=3pt, fill=paleblue, align=center, text width=3.6cm, minimum height=1.5cm},
   arr/.style={-{Stealth[length=2.4mm]}, thick, navy}]
-  \node[stage] (tel) {\textbf{Telemetry}\\[3pt] Event ID 4104\\ AMSI buffer};
-  \node[stage, right=0.36cm of tel] (pre) {\textbf{Pre-}\\\textbf{processing}\\[3pt] decoding, BOM removal, normalisation};
-  \node[stage, right=0.36cm of pre] (fea) {\textbf{Features}\\[3pt] character n-gram TF-IDF; 33 statistical and \attck{} features};
-  \node[stage, right=0.36cm of fea] (det) {\textbf{Detection}\\[3pt] TF-IDF + LR and RF, soft voting; risk score $p$};
-  \node[stage, right=0.36cm of det] (pol) {\textbf{Policy engine}\\[3pt] \textsc{Allow}, \textsc{Alert}, \textsc{Contain}, \textsc{Isolate}};
-  \node[lower, text width=2.45cm, below=0.9cm of pol] (act) {\textbf{Response}\\[3pt] alert, terminate, quarantine, block IOCs, isolate};
-  \node[lower, text width=2.45cm, below=0.9cm of det] (ana) {\textbf{Analyst}\\[3pt] triage, approval of isolation, relabelling};
-  \node[lower, draw=black!55, text width=5.6cm, below=0.9cm of pre, xshift=1.45cm] (off) {\textbf{Offline training and retraining}\\[3pt] corpus audit and de-duplication; family-aware cross-validation; model selection; periodic retraining};
-  \draw[arr] (tel) -- (pre); \draw[arr] (pre) -- (fea); \draw[arr] (fea) -- (det); \draw[arr] (det) -- (pol);
-  \draw[arr] (pol) -- (act); \draw[arr] (act) -- (ana); \draw[arr] (ana) -- (off);
-  \draw[arr, dashed] (off.north east) -- node[right, font=\footnotesize, pos=0.45] {model} (det.south west);
+  \node[box] (a) {\textbf{1. Collect scripts}\\ Windows Event ID 4104};
+  \node[box, right=0.9cm of a] (b) {\textbf{2. Clean data}\\ remove duplicates};
+  \node[box, right=0.9cm of b] (c) {\textbf{3. Extract features}\\ text and behaviour};
+  \node[box, below=1.0cm of c] (d) {\textbf{4. ML model}\\ risk score (0--1)};
+  \node[box, left=0.9cm of d] (e) {\textbf{5. Response policy}\\ choose an action};
+  \node[box, left=0.9cm of e] (f) {\textbf{6. Act and record}\\ alert, block, log};
+  \draw[arr] (a) -- (b); \draw[arr] (b) -- (c); \draw[arr] (c) -- (d);
+  \draw[arr] (d) -- (e); \draw[arr] (e) -- (f);
 \end{tikzpicture}
-\caption{Architecture of the proposed detection and automated response system}\label{fig:arch}
+\caption{Workflow of the proposed system}\label{fig:flow}
 \end{figure}
 
-\subsection{Threat Model and Assumptions}
-The adversary is assumed to have already obtained code execution on a Windows endpoint, for example through a phishing attachment or stolen credentials, and to use PowerShell to download tools, inject code, establish persistence, access credentials or open a command channel. The adversary may obfuscate scripts, rename variables and embed malicious code within otherwise legitimate scripts. Script Block Logging or AMSI is assumed to be enabled, with its output reaching the analysis service; attempts to disable logging or security tooling are treated as suspicious in their own right through the defence-evasion indicators of Section~\ref{sec:features}. Attacks that never invoke PowerShell are out of scope, as are white-box adversarial attacks in which the adversary can query or inspect the model in order to craft evasive inputs~\cite{goodfellow2015}; the latter are discussed as a limitation in Section~\ref{sec:limits}.
+\subsection{Dataset}
+We used the public MPSD dataset released by Fang et al.~\cite{fang2021}. It contains 4,202 malicious scripts, 4,316 benign scripts and 4,202 ``mixed'' scripts in which malicious code is hidden inside a normal script. The malicious scripts include downloaders, shellcode loaders, reverse shells and password-stealing tools. The benign scripts are normal administration scripts collected from public sources. All malicious scripts were treated only as text and were never run.
 
-\subsection{Dataset and Data-Quality Audit}\label{sec:data}
-The study uses the public MPSD corpus released by Fang et al.~\cite{fang2021}. It contains 4,202 malicious scripts (\texttt{malicious\_pure}), 4,316 benign scripts (\texttt{powershell\_benign\_dataset}) and 4,202 ``mixed'' malicious scripts, each created by inserting a malicious script into a benign one. The malicious scripts include download cradles, shellcode loaders, reverse shells, credential-theft tools and persistence scripts, while the benign scripts are administrative scripts and modules collected from public repositories.
+\subsection{Data Cleaning}
+Before training, the data was checked for problems, as recommended by Arp et al.~\cite{arp2022}:
+\begin{itemize}
+  \item \textbf{Duplicates:} only 1,875 of the 4,202 malicious files were unique, which means 55.2\% were exact copies. Duplicates were removed so that every script is counted only once.
+  \item \textbf{Wrong labels:} 12 files appeared in both the malicious and benign folders. As their true label is unknown, they were removed.
+  \item \textbf{Hidden shortcut:} a special byte-order mark appeared at the start of about 35\% of benign files but never in malicious files. A model could learn this meaningless pattern, so it was removed from all files.
+  \item \textbf{Near-copies:} many malicious scripts differ only in variable names or numbers. Such near-copies were grouped into ``families'' (816 families for 1,875 malicious scripts), so that a family is never split between training and testing.
+\end{itemize}
+After cleaning, 1,875 malicious and 4,302 benign scripts remained.
 
-Following the recommendations of Arp et al.~\cite{arp2022}, the corpus was audited before training. Each script was hashed with SHA-256 after whitespace normalisation and lower-casing. Only 1,875 of the 4,202 malicious files were unique, so that 55.2\% were exact copies of another file; duplicates were removed and each distinct script was retained once. Twelve files, sharing six distinct contents, appeared under both the malicious and the benign label; as their true label cannot be established, all of them were discarded. Finally, none of the malicious files began with a UTF-8 byte-order mark (BOM), whereas approximately 35\% of the benign files did. A classifier could therefore learn the rule ``a BOM indicates a benign script'', which an attacker could exploit by prepending three bytes; the BOM is consequently removed from every file before feature extraction.
+\subsection{Feature Extraction}
+Each script is first converted to lower case and the backtick character (\verb|`|) is removed, because PowerShell ignores both and attackers use them to disguise commands. Two kinds of features are then extracted:
+\begin{enumerate}
+  \item \textbf{Text features (TF-IDF):} the script is split into short sequences of 3 to 5 characters, and each sequence is given a weight using TF-IDF~\cite{salton1988}. A sequence gets a high weight if it appears often in a script but rarely in other scripts:
+  \begin{equation}
+    \text{TF-IDF}(t,d) = \text{tf}(t,d) \times \log\frac{N}{\text{df}(t)},
+  \end{equation}
+  where $\text{tf}(t,d)$ is how often sequence $t$ appears in script $d$, $N$ is the number of scripts and $\text{df}(t)$ is the number of scripts that contain $t$.
+  \item \textbf{Behaviour and statistical features (33 features):} simple measurements such as script length, number of lines, randomness of characters (entropy), and counts of suspicious keywords. The keywords are grouped by attacker behaviour and linked to MITRE \attck{}, for example \texttt{DownloadString} (downloading tools, T1105), \texttt{Invoke-Expression} (running code, T1059.001) and \texttt{VirtualAlloc} (code injection, T1055).
+\end{enumerate}
 
-Exact de-duplication does not remove near-duplicates. Many malicious scripts are produced by the same generator and differ only in variable names, numeric constants such as port numbers or shellcode bytes, or whitespace. To capture this, each script $d$ is mapped to a structural skeleton
+\subsection{Machine-Learning Models}
+Four models and one ensemble were trained using the scikit-learn library~\cite{pedregosa2011}:
+\begin{itemize}
+  \item \textbf{Logistic Regression (LR) on text features:} a simple and fast linear model that works well with large numbers of text features.
+  \item \textbf{Logistic Regression on behaviour features:} a simple baseline.
+  \item \textbf{Random Forest (RF) on behaviour features:} a group of 300 decision trees that vote together~\cite{breiman2001}; it can learn complex patterns and is robust.
+  \item \textbf{Gradient Boosting (HGB) on behaviour features:} a strong tree-based model similar to LightGBM~\cite{ke2017}.
+  \item \textbf{Ensemble:} the average of the LR (text) and RF (behaviour) scores. The two models look at different evidence, so combining them makes the result more stable.
+\end{itemize}
+Deep learning was not used because the dataset is small (about 6,000 scripts) and simpler models are faster and easier to explain.
+
+\subsection{Evaluation}
+The models were tested using five-fold cross-validation~\cite{kohavi1995}: the data is split into five parts, and each part is used once for testing while the other four are used for training. Families of near-copies were always kept in the same part, so a model is never tested on a script it has almost seen before. The following measures were used, where TP, FP, TN and FN are true positives, false positives, true negatives and false negatives:
 \begin{equation}
-  \kappa(d) = \mathrm{SHA256}\Big(\,\mathrm{strip}_{\mathrm{ws}}\big(\mathrm{abs}_{\mathrm{num}}(\mathrm{abs}_{\mathrm{var}}(\mathrm{lower}(d)))\big)\Big),
-  \label{eq:skeleton}
+  \text{Precision} = \frac{TP}{TP+FP},\qquad \text{Recall} = \frac{TP}{TP+FN},\qquad F_1 = \frac{2 \times \text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}.
 \end{equation}
-in which $\mathrm{abs}_{\mathrm{var}}$ replaces every variable name by a placeholder, $\mathrm{abs}_{\mathrm{num}}$ replaces decimal and hexadecimal literals by zero and $\mathrm{strip}_{\mathrm{ws}}$ removes all whitespace. Scripts with the same skeleton form a \emph{family}. Under this definition the 1,875 unique malicious scripts belong to only 816 families, whereas the 4,302 benign scripts form 4,292 families. Figure~\ref{fig:dataset} shows the effect of each step.
+Accuracy and the area under the ROC curve (AUC) were also reported.
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[ybar, width=0.82\textwidth, height=6.6cm, bar width=0.8cm, enlarge x limits=0.42,
-  symbolic x coords={Malicious,Benign}, xtick=data, ymin=0, ymax=5400, ylabel={Number of scripts},
-  xticklabels={Malicious (\texttt{malicious\_pure}),Benign}, nodes near coords, every node near coord/.append style={font=\footnotesize, rotate=90, anchor=west},
-  legend style={at={(0.5,1.03)}, anchor=south, legend columns=3, /tikz/every even column/.append style={column sep=0.5cm}}, ymajorgrids, grid style={black!12}]
-%<<BEGIN dataset>>
-\addplot[fill=lightblue,draw=lightblue] coordinates {(Malicious,4202) (Benign,4316)};
-\addplot[fill=midblue,draw=midblue] coordinates {(Malicious,1875) (Benign,4302)};
-\addplot[fill=navy,draw=navy] coordinates {(Malicious,816) (Benign,4292)};
-%<<END dataset>>
-\legend{Raw files, After exact de-duplication, Structural families}
-\end{axis}
-\end{tikzpicture}
-\caption{Effect of the data-quality audit on the MPSD corpus}\label{fig:dataset}
-\end{figure}
-
-\subsection{Pre-processing and Normalisation}
-Each script is decoded as UTF-8, or as UTF-16 when a UTF-16 BOM is present; any BOM is removed and the text is truncated to 200,000 characters in order to bound processing time for a small number of very large files. For the lexical view the text is further normalised in two ways that preserve its meaning. It is converted to lower case, because PowerShell keywords, cmdlet names and variable names are case-insensitive, and backtick characters are removed, because PowerShell ignores the backtick escape within identifiers, so that a command name interrupted by backticks reduces to its canonical form. Runs of spaces and tabs are collapsed. These inexpensive steps reverse two of the most common token-level obfuscations without executing the script. The statistical features of Section~\ref{sec:features} are computed on the raw text, since properties such as the proportion of upper-case characters and the density of backticks are themselves informative.
-
-\subsection{Feature Engineering}\label{sec:features}
-Two complementary views are constructed for every script. The lexical view describes how the code is written, while the statistical and behavioural view describes what the code does and its overall form. The use of complementary views follows the observation of Hendler et al.\ that models built on different representations tend to make different errors~\cite{hendler2018}.
-
-\subsubsection{Character n-gram TF-IDF}
-The normalised text is decomposed into overlapping character sequences of length three to five. Character n-grams tolerate renamed variables and partially split strings and require no PowerShell parser. The weight of n-gram $t$ in script $d$ uses sub-linear term frequency and smoothed inverse document frequency~\cite{salton1988}:
-\begin{equation}
-  w_{t,d} = \big(1 + \ln \mathrm{tf}_{t,d}\big)\left(\ln\frac{1+N}{1+\mathrm{df}_t} + 1\right),
-  \qquad \hat{\mathbf{x}}_d = \frac{\mathbf{x}_d}{\lVert \mathbf{x}_d \rVert_2},
-  \label{eq:tfidf}
-\end{equation}
-where $\mathrm{tf}_{t,d}$ is the number of occurrences of $t$ in $d$, $N$ is the number of training scripts, $\mathrm{df}_t$ is the number of training scripts that contain $t$, and $\mathbf{x}_d$ is the vector of weights $w_{t,d}$. Only n-grams that occur in at least three training scripts are retained, up to a vocabulary of 50,000. The vectoriser is fitted within each cross-validation fold on training data only, so that document frequencies never include test scripts.
-
-\subsubsection{Statistical Features}
-Twenty-four numerical features describe the overall form of a script: its length and number of lines (log-scaled); the mean and maximum line length; the proportions of alphabetic, digit, upper-case, whitespace and special characters; the densities of backticks, plus signs (used for string concatenation), quotation marks and braces; the length of the longest token; the number of Base64-like blobs (runs of 80 or more Base64 characters); the numbers of URLs and IPv4 addresses; the density and number of distinct variables; the proportion of comment lines; the number of function definitions; the number of comment-based help keywords; and the presence of a \texttt{param()} block. The character-level Shannon entropy~\cite{shannon1948},
-\begin{equation}
-  H(d) = -\sum_{c \in \Sigma_d} p_c \log_2 p_c ,
-  \label{eq:entropy}
-\end{equation}
-where $p_c$ is the relative frequency of character $c$ in $d$, is included because encoded or compressed payloads have higher entropy than hand-written code. The documentation-related features reflect the observation that administrative scripts are usually written to be maintained by others and therefore contain help blocks, parameters and functions, whereas attack scripts tend to be short, dense and undocumented.
-
-\subsubsection{Behavioural Indicator Groups Aligned with \attck{}}
-Nine further features count matches of groups of regular expressions that describe common adversary behaviours (Table~\ref{tab:indicators}); each count is log-scaled. Grouping patterns by behaviour instead of using each keyword as a separate feature keeps the feature space small and stable and, more importantly, provides the response engine with human-readable evidence. When a script is contained, the alert can state, for example, that it combined a download cradle (T1105) with dynamic execution (T1059.001). In total, the statistical and behavioural view comprises 33 features.
+\subsection{Automated Response}
+The risk score from the model is used to choose one of four actions, as shown in Table~\ref{tab:tiers}. Less harmful actions are taken automatically, while the most serious action, disconnecting a computer from the network, needs approval from a human analyst. Every decision is saved in a log file, and suspicious web addresses are written in a safe form (for example, \texttt{hxxp} instead of \texttt{http}).
 
 \begin{table}[htbp]
 \centering
-\caption{Behavioural indicator groups, example patterns and associated \attck{} techniques}\label{tab:indicators}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.9cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{4.3cm}}
+\caption{Response levels used by the system}\label{tab:tiers}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}X}
 \toprule
-\textbf{Indicator group} & \textbf{Example patterns (normalised text)} & \textbf{\attck{} technique}\\
+\textbf{Level} & \textbf{Risk score} & \textbf{Action}\\
 \midrule
-Dynamic execution & \texttt{invoke-expression}, \texttt{iex}, \texttt{invoke-command} & T1059.001 PowerShell\\
-Download cradle & \texttt{downloadstring}, \texttt{downloadfile}, \texttt{net.webclient}, \texttt{invoke-webrequest} & T1105 Ingress Tool Transfer\\
-Encoding / compression & \texttt{frombase64string}, \texttt{-encodedcommand}, \texttt{gzipstream} & T1027 Obfuscated Files or Information\\
-Win32 API / injection & \texttt{virtualalloc}, \texttt{createthread}, \texttt{writeprocessmemory}, \texttt{dllimport} & T1055 Process Injection\\
-Defence evasion & \texttt{-windowstyle hidden}, \texttt{-noprofile}, \texttt{bypass}, \texttt{set-mppreference} & T1562.001 Disable or Modify Tools\\
-Persistence & \texttt{schtasks}, \texttt{register-scheduledtask}, \texttt{new-service} & T1053.005 Scheduled Task\\
-Credential access & \texttt{mimikatz}, \texttt{sekurlsa}, \texttt{lsass} & T1003.001 LSASS Memory\\
-Raw sockets & \texttt{net.sockets}, \texttt{tcpclient}, \texttt{tcplistener} & T1095 Non-Application Layer Protocol\\
-Reflection & \texttt{reflection.assembly}, \texttt{add-type} & T1620 Reflective Code Loading\\
+Allow & below 0.30 & Record the result only\\
+Alert & 0.30 to 0.70 & Send an alert to the security team with details\\
+Contain & 0.70 or above & Stop the script, quarantine the file and block its web addresses\\
+Isolate & 0.95 or above, with dangerous behaviour & Disconnect the computer from the network after analyst approval\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\subsection{Classification Models}\label{sec:models}
-Four single-view models and one ensemble were compared, all implemented with scikit-learn~\cite{pedregosa2011}. After cleaning, the ratio of malicious to benign scripts is approximately 1:2.3, and every model therefore uses class weights $\alpha_y = n/(2n_y)$, where $n_y$ is the number of training scripts of class $y$.
-
-\paragraph{Logistic regression.} For the high-dimensional, sparse TF-IDF view, logistic regression (LR) is a natural choice: it trains quickly, is resistant to over-fitting under $L_2$ regularisation and its coefficients identify the n-grams that drive a decision. With labels $\tilde{y}_i \in \{-1,+1\}$, the model is obtained by solving
-\begin{equation}
-  \min_{\mathbf{w},b}\; \tfrac{1}{2}\lVert\mathbf{w}\rVert_2^2 + C \sum_{i=1}^{n} \alpha_{y_i} \log\!\Big(1 + e^{-\tilde{y}_i(\mathbf{w}^{\top}\mathbf{x}_i + b)}\Big),
-  \qquad P(y=1 \mid \mathbf{x}) = \sigma(\mathbf{w}^{\top}\mathbf{x} + b),
-  \label{eq:lr}
-\end{equation}
-where $\sigma$ is the logistic function and $C=10$. The same model, applied to the 33 standardised hand-crafted features with $C=1$, serves as an interpretable baseline.
-
-\paragraph{Random forest.} A random forest (RF) of $T=300$ decision trees, each grown on a bootstrap sample with random feature subsets and split by Gini impurity $G = 1 - \sum_k p_k^2$~\cite{breiman2001}, is trained on the hand-crafted features. Its probability estimate is the average of the tree estimates, $\hat{p}_{\mathrm{RF}}(\mathbf{x}) = \frac{1}{T}\sum_{t=1}^{T}\hat{p}_t(\mathbf{x})$. Random forests capture non-linear interactions between features, require no scaling and are robust to outliers such as extremely long scripts.
-
-\paragraph{Histogram gradient boosting.} A boosted tree ensemble (HGB) that bins features into histograms, in the manner of LightGBM~\cite{ke2017}, is included as a strong conventional learner for tabular data.
-
-\paragraph{Soft-voting ensemble.} The final detector averages the malicious-class probabilities of the lexical and behavioural models:
-\begin{equation}
-  p_{\mathrm{ens}}(\mathbf{x}) = \tfrac{1}{2}\, p_{\mathrm{LR}}^{\text{TF-IDF}}(\mathbf{x}) + \tfrac{1}{2}\, \hat{p}_{\mathrm{RF}}^{\text{hand}}(\mathbf{x}).
-  \label{eq:ens}
-\end{equation}
-Because the two members rely on different evidence, surface character patterns on the one hand and overall form and behaviour on the other, their errors are only weakly correlated. Equal weights were fixed in advance rather than tuned on the evaluation folds, so as to avoid optimistic bias. Deep neural networks were not used: on a corpus of roughly six thousand unique scripts, published results~\cite{song2021,fang2021} indicate that well-engineered classical models are competitive, and they are cheaper to train, faster at inference and easier to explain to an analyst.
-
-\subsection{Evaluation Protocol}\label{sec:protocol}
-All models are evaluated by five-fold cross-validation~\cite{kohavi1995} under two protocols. The \emph{naive} protocol, used only for comparison, applies ordinary stratified five-fold cross-validation to the raw corpus including duplicates; it mirrors a common practice in the literature. The \emph{family-aware} protocol, which provides the main results, applies stratified group five-fold cross-validation to the de-duplicated corpus, using the skeleton family of Equation~\eqref{eq:skeleton} as the group. All members of a family are thus assigned to the same fold, and no model is tested on a script whose near-copy it has seen during training.
-
-Predictions on the held-out folds are pooled, so that every script is scored exactly once by a model that did not see it during training. Treating the malicious class as positive, the following measures are reported:
-\begin{gather}
-  \mathrm{Precision} = \frac{TP}{TP+FP},\qquad
-  \mathrm{Recall} = \mathrm{TPR} = \frac{TP}{TP+FN},\nonumber\\
-  F_1 = \frac{2\,\mathrm{Precision}\cdot\mathrm{Recall}}{\mathrm{Precision}+\mathrm{Recall}},\qquad
-  \mathrm{FPR} = \frac{FP}{FP+TN},
-  \label{eq:metrics}
-\end{gather}
-together with accuracy, the area under the ROC curve (ROC-AUC) and the true-positive rate at a fixed false-positive rate of 1\% (TPR@1\%FPR), obtained by linear interpolation of the ROC curve. The last measure is the most relevant operationally: in a large organisation even a 1\% false-positive rate on benign scripts can produce many alerts per day, so the detection rate at a low and fixed FPR is a more meaningful summary than accuracy~\cite{saito2015,arp2022}.
-
-A third experiment uses the mixed subset of MPSD, in which malicious code is hidden inside a benign script. To avoid leakage, each mixed sample is scored only by the model of the fold that did not contain its malicious parent script. The benign host may have been seen during training with a benign label, which makes the test deliberately demanding. Mixed samples whose malicious parent could not be identified from the file name were excluded.
-
-\subsection{Automated Response Policy}\label{sec:policy}
-Detection alone does not stop an attack. The response engine maps the ensemble score $p$ and the set $\mathcal{G}$ of behavioural indicator groups that fired to one of four tiers:
-\begin{equation}
-  \mathrm{tier}(p,\mathcal{G}) =
-  \begin{cases}
-    \textsc{Isolate} & \text{if } p \ge 0.95 \text{ and } \mathcal{G}\cap\mathcal{H} \neq \emptyset,\\
-    \textsc{Contain} & \text{if } p \ge 0.70 \text{ (and not \textsc{Isolate})},\\
-    \textsc{Alert}   & \text{if } 0.30 \le p < 0.70,\\
-    \textsc{Allow}   & \text{if } p < 0.30,
-  \end{cases}
-  \label{eq:tier}
-\end{equation}
-where $\mathcal{H}$ contains the high-impact groups (Win32 API/injection, credential access and reflection). The tiers follow the principle of proportionality: inexpensive and reversible actions are automated freely, disruptive actions require stronger evidence, and network isolation of a host additionally requires analyst approval. Table~\ref{tab:policy} lists the actions associated with each tier. The thresholds were fixed \emph{a priori} from the operational meaning of each tier rather than tuned on test data; Section~\ref{sec:resp} reports how the out-of-fold scores are distributed relative to them.
+%% ---------------------------------------------------------------------
+\section{Implementation Details}
+%% ---------------------------------------------------------------------
+The system was written in Python. Table~\ref{tab:tools} lists the main tools.
 
 \begin{table}[htbp]
 \centering
-\caption{Response tiers, triggering conditions and automated actions}\label{tab:policy}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.9cm} >{\raggedright\arraybackslash}p{3.1cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.9cm}}
-\toprule
-\textbf{Tier} & \textbf{Condition} & \textbf{Automated actions} & \textbf{Human role}\\
-\midrule
-\textsc{Allow} & $p < 0.30$ & Record verdict in SIEM & None\\
-\textsc{Alert} & $0.30 \le p < 0.70$ & Record verdict; open a SOC ticket with score, \attck{} techniques and defanged IOCs & Analyst triage\\
-\textsc{Contain} & $p \ge 0.70$ & As above, plus terminate the PowerShell process, quarantine the script file, block its SHA-256 hash and block extracted URLs and IP addresses & Review; may roll back\\
-\textsc{Isolate} & $p \ge 0.95$ and a high-impact group present & As above, plus network isolation of the host & Approval required\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-Every decision, comprising the score, tier, techniques, indicators of compromise (IOCs) and actions, is written as one JSON record to an append-only audit log. IOCs are defanged (for instance, \texttt{http} becomes \texttt{hxxp} and dots become \texttt{[.]}) so that log entries cannot be followed accidentally. By default the engine operates in a dry-run mode in which every action is marked as simulated, which reflects the way SOAR playbooks are normally validated before being permitted to act~\cite{islam2019}.
-
-\subsection{Ethical and Safety Considerations}
-All malicious samples were handled purely as text and were never executed. The dataset is obtained from its public source at run time and is not redistributed with the project code. IOCs are defanged in all outputs and are omitted from this report. The response engine cannot perform a real action unless dry-run mode is explicitly disabled, and host isolation always requires human approval, consistent with the principle that automated defences should fail safely and remain accountable to people~\cite{nist2025}.
-
-%% =====================================================================
-\section{Implementation Details}\label{sec:impl}
-%% =====================================================================
-
-\subsection{Development Environment}
-The system was implemented in Python. Table~\ref{tab:env} lists the software and hardware used for all experiments.
-
-\begin{table}[htbp]
-\centering
-\caption{Software and hardware environment}\label{tab:env}
+\caption{Tools and environment}\label{tab:tools}
 \begin{tabular}{ll}
 \toprule
-\textbf{Component} & \textbf{Version / specification}\\
+\textbf{Item} & \textbf{Details}\\
 \midrule
 Programming language & Python 3.13\\
-Machine-learning library & scikit-learn 1.9~\cite{pedregosa2011}\\
-Data handling & pandas 3.0, NumPy 2.5\\
-Plotting & Matplotlib 3.11\\
-Testing & pytest (seven unit tests)\\
-Hardware & 4 virtual CPU cores, 15 GB RAM, no GPU\\
-Dataset & MPSD, public repository \texttt{das-lab/mpsd}~\cite{fang2021}\\
+Machine-learning library & scikit-learn 1.9\\
+Data handling & pandas, NumPy\\
+Graphs & Matplotlib\\
+Hardware & 4-core CPU, 15 GB RAM (no GPU)\\
+Dataset & MPSD (public, GitHub)~\cite{fang2021}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Software Architecture}
-The code is organised as a small Python package and a set of experiment scripts (Table~\ref{tab:modules}). Every model is a scikit-learn \texttt{Pipeline} that accepts raw script text, so the same code path is used in cross-validation, in the response simulation and in deployment. Random seeds are fixed, and all reported figures can be regenerated by fetching the dataset and running the experiment scripts.
+The code is divided into four main parts:
+\begin{enumerate}
+  \item \textbf{Data module:} reads the scripts, removes duplicates and wrong labels, and groups near-copies into families.
+  \item \textbf{Feature module:} cleans the text and calculates the text and behaviour features.
+  \item \textbf{Model module:} trains and tests the models and the ensemble.
+  \item \textbf{Response module:} reads Windows Event ID 4104 records, gets a risk score from the model, chooses the response level, adds the matching \attck{} technique and writes the decision to a log. For safety, it runs in a test (dry-run) mode where actions are recorded but not actually carried out.
+\end{enumerate}
+In a real organisation, Script Block Logging would be switched on through Group Policy~\cite{ms_logging}, the logs would be sent to a central server for scoring, and the response module would be connected to the company's security tools. Seven unit tests were written to check the main functions, and all of them pass.
+
+%% ---------------------------------------------------------------------
+\section{Results and Discussion}
+%% ---------------------------------------------------------------------
+
+\subsection{Model Performance}
+Table~\ref{tab:results} shows the results of all models, and Figure~\ref{fig:f1} compares their F1-scores. All models performed well, which shows that malicious and benign PowerShell scripts are clearly different. The text-based LR model had the highest F1-score (0.974), and the ensemble was almost the same (0.972) but produced the fewest false alarms among the high-scoring models (30 compared with 37). Since false alarms can stop legitimate work, the ensemble was chosen for the response system. The behaviour-only LR model was the weakest, which shows that tree-based models capture patterns that a simple linear model misses.
 
 \begin{table}[htbp]
 \centering
-\caption{Main modules of the implementation}\label{tab:modules}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{4.7cm} >{\raggedright\arraybackslash}X}
+\caption{Performance of the models (five-fold cross-validation)}\label{tab:results}
+\begin{tabular}{lccccc}
 \toprule
-\textbf{Directory} & \textbf{File} & \textbf{Responsibility}\\
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC}\\
 \midrule
-\multirow{4}{*}{\texttt{psdetect/}} & \texttt{data.py} & Reading scripts, BOM removal, de-duplication, label conflicts, skeleton families\\
- & \texttt{features.py} & Normalisation, statistical features, \attck{}-aligned indicators\\
- & \texttt{models.py} & Model pipelines and the soft-voting ensemble\\
- & \texttt{response.py} & Scoring, tiers, \attck{} mapping, IOC defanging, actions, audit log\\
-\midrule
-\multirow{3}{*}{\texttt{experiments/}} & \texttt{run\_experiments.py} & Naive and family-aware cross-validation, embedded-code test\\
- & \texttt{mixed\_training.py} & Leakage-free mixed-aware training\\
- & \texttt{simulate\_response.py} & Replay of a held-out fold as Event ID 4104 records\\
-\midrule
-\texttt{tests/} & \texttt{test\_pipeline.py} & Unit tests for features, hashing, tiers and defanging\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Hyper-parameters}
-Table~\ref{tab:hyper} lists the hyper-parameters. They were set from common defaults followed by a brief sanity check rather than an exhaustive search on the evaluation folds; a nested search might yield small gains but would increase the risk of over-fitting the limited number of malicious families.
-
-\begin{table}[htbp]
-\centering
-\caption{Model hyper-parameters}\label{tab:hyper}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}X}
-\toprule
-\textbf{Model} & \textbf{Settings}\\
-\midrule
-TF-IDF + LR & character 3--5-grams, \texttt{min\_df}=3, 50,000 features, sub-linear tf; $C=10$, $L_2$ penalty, balanced class weights\\
-Hand-crafted + LR & standardised features; $C=1$, balanced class weights\\
-Hand-crafted + RF & 300 trees, Gini impurity, unlimited depth, balanced class weights\\
-Hand-crafted + HGB & 300 boosting iterations, learning rate 0.08, balanced class weights\\
-Ensemble & equal-weight average of TF-IDF + LR and hand-crafted + RF (Eq.~\eqref{eq:ens})\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Response Engine}
-Algorithm~\ref{alg:response} summarises the processing of a single Event ID 4104 record.
-
-\begin{algorithm}[htbp]
-\caption{Processing of one script-block event by the response engine}\label{alg:response}
-\begin{algorithmic}[1]
-\Require event $e$ with fields \textit{ScriptBlockText}, \textit{ScriptBlockId}, \textit{Computer}, \textit{ProcessId}, \textit{Path}; trained model $M$; policy thresholds
-\Ensure decision record appended to the audit log
-\State $t_0 \gets$ current time
-\State $p \gets M.\mathrm{predict\_proba}(e.\mathit{ScriptBlockText})$
-\State $\mathcal{G} \gets \{\, g : \text{indicator group } g \text{ matches the normalised text} \,\}$
-\State $\tau \gets \mathrm{tier}(p,\mathcal{G})$ \Comment{Equation~\eqref{eq:tier}}
-\State $\mathcal{T} \gets \{\, \mathrm{ATTACK}(g) : g \in \mathcal{G} \,\}$
-\If{$\tau \ge \textsc{Alert}$}
-  \State extract URLs and IP addresses from the text and defang them
-\EndIf
-\State $A \gets$ actions prescribed for $\tau$ (Table~\ref{tab:policy}); mark each as simulated if dry-run
-\If{$\tau = \textsc{Isolate}$}
-  \State flag the decision as requiring analyst approval
-\EndIf
-\State write $(e.\mathit{ScriptBlockId}, p, \tau, \mathcal{T}, A, \text{time} - t_0)$ to the audit log
-\end{algorithmic}
-\end{algorithm}
-
-\subsection{Deployment on Windows Endpoints}
-In a production deployment, Script Block Logging is enabled through Group Policy (Administrative Templates, Windows Components, Windows PowerShell, \emph{Turn on PowerShell Script Block Logging})~\cite{ms_logging}. Event ID 4104 records are forwarded to a central collector by Windows Event Forwarding or an endpoint agent. Windows splits large scripts across several 4104 events that share a \textit{ScriptBlockId} and carry \textit{MessageNumber} and \textit{MessageTotal} fields, so the collector reassembles them before scoring. The trained pipeline is serialised and served behind an internal interface, and the action stubs of the response engine are connected to the organisation's endpoint detection and response (EDR) platform, firewall and ticketing system. Because AMSI exposes the same script content immediately before execution~\cite{ms_amsi}, the model could also be invoked from an AMSI provider in order to block high-confidence scripts before they run rather than respond afterwards.
-
-\subsection{Verification}
-Seven unit tests verify that normalisation folds case and backticks; that the feature vector has the expected dimension and finite values; that the indicator groups fire on a typical download cradle but not on a documented administrative function; that two scripts differing only in variable names share a skeleton; that the policy assigns the correct tier for given scores; that isolation is selected only in the presence of a high-impact technique and is flagged for approval; and that IOC defanging behaves as specified. All tests pass.
-
-%% =====================================================================
-\section{Results and Discussion}\label{sec:results}
-%% =====================================================================
-
-\subsection{Effect of the Data-Quality Audit}
-The audit altered the experimental setting before any model was trained. Of the 8,518 raw files, 2,329 exact duplicates and 12 conflicting files were removed, leaving 1,875 malicious and 4,302 benign scripts. The class balance therefore changed from approximately 1:1 in the raw corpus to approximately 1:2.3. More importantly, the 1,875 unique malicious scripts belong to only 816 structural families, so that each malicious template appears on average 2.3 times with cosmetic differences. A split that distributes such families across training and test folds allows a model to succeed by recognising near-copies rather than by learning what makes a script malicious. Section~\ref{sec:proto} quantifies this effect.
-
-\subsection{Detection Performance under Family-Aware Evaluation}
-Table~\ref{tab:perf} reports the out-of-fold results under the family-aware protocol. All models perform well, which confirms that malicious and benign PowerShell differ substantially in both wording and behaviour, but the differences between the models are informative.
-
-\begin{table}[htbp]
-\centering
-\caption{Out-of-fold detection performance under family-aware five-fold cross-validation (threshold 0.5; malicious is the positive class)}\label{tab:perf}
-\small
-\setlength{\tabcolsep}{4.5pt}
-\begin{tabular}{lcccccccc}
-\toprule
-\textbf{Model} & \textbf{Acc.} & \textbf{Prec.} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} & \textbf{TPR@1\%} & \textbf{FP} & \textbf{FN}\\
-\midrule
-Hand-crafted + LR  & 0.974 & 0.953 & 0.960 & 0.957 & 0.988 & 0.941 & 88 & 75\\
-Hand-crafted + RF  & 0.980 & 0.982 & 0.952 & 0.967 & 0.995 & 0.957 & 33 & 90\\
-Hand-crafted + HGB & 0.979 & \textbf{0.984} & 0.948 & 0.966 & 0.996 & 0.962 & \textbf{29} & 98\\
-Char TF-IDF + LR   & \textbf{0.985} & 0.980 & \textbf{0.969} & \textbf{0.974} & \textbf{0.999} & 0.973 & 37 & \textbf{59}\\
-Ensemble (TF-IDF LR + RF) & 0.984 & \textbf{0.984} & 0.962 & 0.972 & 0.998 & \textbf{0.974} & 30 & 72\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Lexical features constitute the strongest single view: TF-IDF + LR achieves the highest F1 (0.974) and ROC-AUC (0.9986). Character n-grams capture fragments of API names, .NET type names and command-line switches even when these are split across strings or surrounded by unfamiliar code. The 33 hand-crafted features are also effective; the tree-based models reach F1-scores of 0.967 (RF) and 0.966 (HGB) and the highest precision of all models. Logistic regression on the same features is clearly weaker (F1 0.957, 88 false positives), which indicates that interactions between features, captured by trees but not by a linear decision boundary, are important.
-
-The ensemble exchanges a small amount of recall for fewer false alarms. At the default threshold it produces 30 false positives compared with 37 for the lexical model, at the cost of 13 additional false negatives, so that the two F1-scores are almost identical (0.972 and 0.974). At the operating point of greatest practical interest, a 1\% false-positive rate, their detection rates are virtually the same (97.39\% and 97.33\%). The ensemble was nevertheless retained as the detector behind the response engine for two reasons. False positives are what make automated containment costly, since each one may terminate a legitimate administrative task, so the model with the fewest false alarms at a competitive detection rate is preferable. In addition, the random-forest member provides behavioural evidence that can be explained to an analyst more readily than a large set of n-gram weights. Across the five folds, the F1-score of the ensemble ranged from 0.945 to 0.994 (mean 0.972, standard deviation 0.017); the variation arises mainly from which malicious families fall into each test fold.
-
-Figure~\ref{fig:roc} shows the ROC curves on a logarithmic false-positive axis, which magnifies the low-FPR region that matters in practice. The lexical model and the ensemble dominate the hand-crafted models below 1\% FPR, while hand-crafted LR is weaker across the whole range. Figure~\ref{fig:cm} gives the confusion matrix of the ensemble: 4,272 of 4,302 benign scripts (99.30\%) and 1,803 of 1,875 malicious scripts (96.16\%) are classified correctly.
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=0.86\textwidth, height=7.6cm, xmode=log, xmin=1e-4, xmax=1, ymin=0.5, ymax=1.005,
-  xlabel={False-positive rate (logarithmic scale)}, ylabel={True-positive rate},
-  legend style={at={(0.5,-0.2)}, anchor=north, legend columns=2, /tikz/every even column/.append style={column sep=0.5cm}}, legend cell align=left, grid=major, grid style={black!10},
-  cycle list={{lightblue, densely dotted, very thick},{midblue, dashed, thick},{midblue!70!black, dash dot, thick},{black, densely dotted, thick},{navy, very thick}}]
-%<<BEGIN roc0>>
-\addplot coordinates {
-  (0.0001,0) (0.0001166,0) (0.0001359,0) (0.0001585,0) (0.0001848,0) (0.0002154,0)
-  (0.0002512,0.01653) (0.0002929,0.01653) (0.0003415,0.01653) (0.0003981,0.01653)
-  (0.0004642,0.01653) (0.0005412,0.1301) (0.000631,0.1301) (0.0007356,0.2011)
-  (0.0008577,0.2011) (0.001,0.4144) (0.001166,0.4933) (0.001359,0.4933) (0.001585,0.6299)
-  (0.001848,0.7413) (0.002154,0.76) (0.002512,0.7765) (0.002929,0.7947) (0.003415,0.8016)
-  (0.003981,0.8325) (0.004642,0.8768) (0.005412,0.8944) (0.00631,0.9077) (0.007356,0.9333)
-  (0.008577,0.9376) (0.01,0.9413) (0.01166,0.9429) (0.01359,0.9515) (0.01585,0.9563)
-  (0.01848,0.9579) (0.02154,0.9637) (0.02512,0.9653) (0.02929,0.9664) (0.03415,0.9669)
-  (0.03981,0.9685) (0.04642,0.9691) (0.05412,0.9701) (0.0631,0.9728) (0.07356,0.9728)
-  (0.08577,0.9739) (0.1,0.9739) (0.1166,0.9755) (0.1359,0.9765) (0.1585,0.9787)
-  (0.1848,0.9813) (0.2154,0.984) (0.2512,0.9856) (0.2929,0.9888) (0.3415,0.9904)
-  (0.3981,0.992) (0.4642,0.9931) (0.5412,0.9947) (0.631,0.9968) (0.7356,0.9979)
-  (0.8577,0.9984) (1,1)
-};
-%<<END roc0>>
-%<<BEGIN roc1>>
-\addplot coordinates {
-  (0.0001,0.9099) (0.0001166,0.9099) (0.0001359,0.9099) (0.0001585,0.9099)
-  (0.0001848,0.9099) (0.0002154,0.9099) (0.0002512,0.9125) (0.0002929,0.9125)
-  (0.0003415,0.9125) (0.0003981,0.9125) (0.0004642,0.9125) (0.0005412,0.9152)
-  (0.000631,0.9152) (0.0007356,0.9189) (0.0008577,0.9189) (0.001,0.9227) (0.001166,0.9243)
-  (0.001359,0.9243) (0.001585,0.9253) (0.001848,0.928) (0.002154,0.9333) (0.002512,0.9371)
-  (0.002929,0.9403) (0.003415,0.9403) (0.003981,0.9435) (0.004642,0.9435) (0.005412,0.9456)
-  (0.00631,0.9461) (0.007356,0.9515) (0.008577,0.9531) (0.01,0.9568) (0.01166,0.9632)
-  (0.01359,0.9653) (0.01585,0.9669) (0.01848,0.9701) (0.02154,0.9733) (0.02512,0.976)
-  (0.02929,0.9781) (0.03415,0.9797) (0.03981,0.9803) (0.04642,0.9819) (0.05412,0.984)
-  (0.0631,0.9856) (0.07356,0.9872) (0.08577,0.9877) (0.1,0.9883) (0.1166,0.9904)
-  (0.1359,0.9909) (0.1585,0.9925) (0.1848,0.9947) (0.2154,0.9952) (0.2512,0.9952)
-  (0.2929,0.9952) (0.3415,0.9963) (0.3981,0.9963) (0.4642,0.9968) (0.5412,0.9968)
-  (0.631,0.9968) (0.7356,0.9989) (0.8577,0.9989) (1,1)
-};
-%<<END roc1>>
-%<<BEGIN roc2>>
-\addplot coordinates {
-  (0.0001,0.8549) (0.0001166,0.8549) (0.0001359,0.8549) (0.0001585,0.8549)
-  (0.0001848,0.8549) (0.0002154,0.8549) (0.0002512,0.9077) (0.0002929,0.9077)
-  (0.0003415,0.9077) (0.0003981,0.9077) (0.0004642,0.9077) (0.0005412,0.9205)
-  (0.000631,0.9205) (0.0007356,0.9205) (0.0008577,0.9205) (0.001,0.9205) (0.001166,0.9211)
-  (0.001359,0.9211) (0.001585,0.9232) (0.001848,0.9296) (0.002154,0.9333) (0.002512,0.9349)
-  (0.002929,0.9371) (0.003415,0.9387) (0.003981,0.9403) (0.004642,0.9413) (0.005412,0.9419)
-  (0.00631,0.944) (0.007356,0.9483) (0.008577,0.9589) (0.01,0.9621) (0.01166,0.9643)
-  (0.01359,0.9675) (0.01585,0.9696) (0.01848,0.9728) (0.02154,0.9755) (0.02512,0.9765)
-  (0.02929,0.9776) (0.03415,0.9792) (0.03981,0.9813) (0.04642,0.9829) (0.05412,0.9856)
-  (0.0631,0.9867) (0.07356,0.9893) (0.08577,0.9893) (0.1,0.992) (0.1166,0.9925)
-  (0.1359,0.9925) (0.1585,0.9936) (0.1848,0.9936) (0.2154,0.9936) (0.2512,0.9941)
-  (0.2929,0.9947) (0.3415,0.9957) (0.3981,0.9968) (0.4642,0.9979) (0.5412,0.9984)
-  (0.631,0.9989) (0.7356,1) (0.8577,1) (1,1)
-};
-%<<END roc2>>
-%<<BEGIN roc3>>
-\addplot coordinates {
-  (0.0001,0.8933) (0.0001166,0.8933) (0.0001359,0.8933) (0.0001585,0.8933)
-  (0.0001848,0.8933) (0.0002154,0.8933) (0.0002512,0.8944) (0.0002929,0.8944)
-  (0.0003415,0.8944) (0.0003981,0.8944) (0.0004642,0.8944) (0.0005412,0.9168)
-  (0.000631,0.9168) (0.0007356,0.9168) (0.0008577,0.9168) (0.001,0.9173) (0.001166,0.9264)
-  (0.001359,0.9264) (0.001585,0.9269) (0.001848,0.9285) (0.002154,0.9296) (0.002512,0.9317)
-  (0.002929,0.9333) (0.003415,0.9429) (0.003981,0.9499) (0.004642,0.9504) (0.005412,0.9568)
-  (0.00631,0.9584) (0.007356,0.9616) (0.008577,0.9675) (0.01,0.9733) (0.01166,0.976)
-  (0.01359,0.9792) (0.01585,0.9797) (0.01848,0.9813) (0.02154,0.9819) (0.02512,0.9845)
-  (0.02929,0.9872) (0.03415,0.9909) (0.03981,0.9936) (0.04642,0.9941) (0.05412,0.9957)
-  (0.0631,0.9957) (0.07356,0.9963) (0.08577,0.9963) (0.1,0.9963) (0.1166,0.9973)
-  (0.1359,0.9979) (0.1585,0.9995) (0.1848,1) (0.2154,1) (0.2512,1) (0.2929,1) (0.3415,1)
-  (0.3981,1) (0.4642,1) (0.5412,1) (0.631,1) (0.7356,1) (0.8577,1) (1,1)
-};
-%<<END roc3>>
-%<<BEGIN roc4>>
-\addplot coordinates {
-  (0.0001,0.9147) (0.0001166,0.9147) (0.0001359,0.9147) (0.0001585,0.9147)
-  (0.0001848,0.9147) (0.0002154,0.9147) (0.0002512,0.9163) (0.0002929,0.9163)
-  (0.0003415,0.9163) (0.0003981,0.9163) (0.0004642,0.9163) (0.0005412,0.9163)
-  (0.000631,0.9163) (0.0007356,0.9232) (0.0008577,0.9232) (0.001,0.9232) (0.001166,0.9232)
-  (0.001359,0.9232) (0.001585,0.9269) (0.001848,0.9275) (0.002154,0.9355) (0.002512,0.9355)
-  (0.002929,0.9419) (0.003415,0.9435) (0.003981,0.9456) (0.004642,0.9461) (0.005412,0.9531)
-  (0.00631,0.9552) (0.007356,0.9632) (0.008577,0.9664) (0.01,0.9739) (0.01166,0.9787)
-  (0.01359,0.9792) (0.01585,0.9813) (0.01848,0.9824) (0.02154,0.984) (0.02512,0.9856)
-  (0.02929,0.9877) (0.03415,0.9877) (0.03981,0.9877) (0.04642,0.9888) (0.05412,0.9915)
-  (0.0631,0.9915) (0.07356,0.9941) (0.08577,0.9952) (0.1,0.9979) (0.1166,0.9979)
-  (0.1359,0.9979) (0.1585,0.9979) (0.1848,0.9984) (0.2154,0.9984) (0.2512,0.9989)
-  (0.2929,0.9989) (0.3415,0.9995) (0.3981,1) (0.4642,1) (0.5412,1) (0.631,1) (0.7356,1)
-  (0.8577,1) (1,1)
-};
-%<<END roc4>>
-\draw[black!50, dashed] (axis cs:0.01,0.5) -- (axis cs:0.01,1.005);
-\node[font=\footnotesize, black!70, anchor=west] at (axis cs:0.0105,0.70) {FPR = 1\%};
-\legend{Hand-crafted + LR (AUC 0.988), Hand-crafted + RF (AUC 0.995), Hand-crafted + HGB (AUC 0.996), Char TF-IDF + LR (AUC 0.999), Ensemble (AUC 0.998)}
-\end{axis}
-\end{tikzpicture}
-\caption{ROC curves of all models under family-aware cross-validation}\label{fig:roc}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[cell/.style={minimum width=3.0cm, minimum height=1.55cm, draw=white, line width=1.5pt, align=center, font=\small}]
-  \node[cell, fill=navy!95, text=white] at (0,0) {4,272\\(99.30\%)};
-  \node[cell, fill=paleblue] at (3.0,0) {30\\(0.70\%)};
-  \node[cell, fill=paleblue] at (0,-1.55) {72\\(3.84\%)};
-  \node[cell, fill=navy!92, text=white] at (3.0,-1.55) {1,803\\(96.16\%)};
-  \node[font=\small, anchor=east] at (-1.6,0) {Benign};
-  \node[font=\small, anchor=east] at (-1.6,-1.55) {Malicious};
-  \node[font=\small] at (0,0.95) {Benign};
-  \node[font=\small] at (3.0,0.95) {Malicious};
-  \node[font=\small\bfseries] at (1.5,1.45) {Predicted class};
-  \node[font=\small\bfseries, rotate=90] at (-3.95,-0.78) {Actual class};
-\end{tikzpicture}
-\caption{Confusion matrix of the ensemble (out-of-fold, threshold 0.5); percentages are relative to the actual class}\label{fig:cm}
-\end{figure}
-
-\subsection{Effect of the Evaluation Protocol}\label{sec:proto}
-Table~\ref{tab:proto} and Figure~\ref{fig:proto} compare the two protocols. Under the naive protocol, in which duplicates are retained and folds are random, every model appears better: the F1-score increases by between 0.014 and 0.024, and the TPR@1\%FPR of the ensemble rises from 97.39\% to 98.83\%. The absolute differences appear small, but they conceal a large relative difference in errors. The proportion of malicious scripts missed by the ensemble is 3.84\% under the family-aware protocol and 1.69\% under the naive one, so a naive evaluation would understate the miss rate on genuinely new attacks by a factor of about 2.3. This is consistent with the warnings of Arp et al.~\cite{arp2022} and Pendlebury et al.~\cite{pendlebury2019}, and it suggests that results reported on MPSD with random splits should be interpreted with this effect in mind.
-
-\begin{table}[htbp]
-\centering
-\caption{Naive random split on raw data compared with the family-aware split on cleaned data}\label{tab:proto}
-\begin{tabular}{lcccc}
-\toprule
-& \multicolumn{2}{c}{\textbf{F1-score}} & \multicolumn{2}{c}{\textbf{TPR at 1\% FPR}}\\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}
-\textbf{Model} & \textbf{Naive} & \textbf{Family-aware} & \textbf{Naive} & \textbf{Family-aware}\\
-\midrule
-Hand-crafted + LR  & 0.981 & 0.957 & 0.970 & 0.941\\
-Hand-crafted + RF  & 0.985 & 0.967 & 0.983 & 0.957\\
-Hand-crafted + HGB & 0.986 & 0.966 & 0.983 & 0.962\\
-Char TF-IDF + LR   & 0.988 & 0.974 & 0.988 & 0.973\\
-Ensemble           & 0.988 & 0.972 & 0.988 & 0.974\\
+LR (behaviour)        & 0.974 & 0.953 & 0.960 & 0.957 & 0.988\\
+RF (behaviour)        & 0.980 & 0.982 & 0.952 & 0.967 & 0.995\\
+HGB (behaviour)       & 0.979 & 0.984 & 0.948 & 0.966 & 0.996\\
+LR (text, TF-IDF)     & 0.985 & 0.980 & 0.969 & 0.974 & 0.999\\
+Ensemble (LR + RF)    & 0.984 & 0.984 & 0.962 & 0.972 & 0.998\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -655,392 +292,155 @@ Ensemble           & 0.988 & 0.972 & 0.988 & 0.974\\
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[xbar, width=0.8\textwidth, height=7.0cm, bar width=0.28cm, xmin=0.90, xmax=1.0,
-%<<BEGIN proto_coords>>
-symbolic y coords={Ensemble,TF-IDF + LR,HC + HGB,HC + RF,HC + LR},
-%<<END proto_coords>>
-  ytick=data, xlabel={True-positive rate at 1\% false-positive rate}, enlarge y limits=0.14,
-  legend style={at={(0.5,1.02)}, anchor=south, legend columns=2, /tikz/every even column/.append style={column sep=0.5cm}}, xmajorgrids, grid style={black!10},
-  nodes near coords, every node near coord/.append style={font=\scriptsize, /pgf/number format/fixed, /pgf/number format/precision=3}, nodes near coords align={horizontal},
-  xticklabel style={/pgf/number format/fixed, /pgf/number format/precision=2}]
-%<<BEGIN proto>>
-\addplot[fill=lightblue,draw=lightblue] coordinates {(0.9883,{Ensemble}) (0.9879,{TF-IDF + LR}) (0.9831,{HC + HGB}) (0.9831,{HC + RF}) (0.9700,{HC + LR})};
-\addplot[fill=navy,draw=navy] coordinates {(0.9739,{Ensemble}) (0.9733,{TF-IDF + LR}) (0.9621,{HC + HGB}) (0.9568,{HC + RF}) (0.9413,{HC + LR})};
-%<<END proto>>
-\legend{Naive random split (duplicates kept), Family-aware split (de-duplicated)}
+\begin{axis}[ybar, width=0.85\textwidth, height=6cm, bar width=0.9cm, ymin=0.94, ymax=0.98,
+  symbolic x coords={LR (behaviour),RF (behaviour),HGB (behaviour),LR (text),Ensemble},
+  xtick=data, xticklabels={{LR\\(behaviour)},{RF\\(behaviour)},{HGB\\(behaviour)},{LR\\(text)},{Ensemble}}, x tick label style={font=\small, align=center},
+  ylabel={F1-score}, nodes near coords, every node near coord/.append style={font=\small, /pgf/number format/fixed, /pgf/number format/precision=3},
+  yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=2},
+  ymajorgrids, grid style={black!12}, enlarge x limits=0.15]
+\addplot[fill=midblue, draw=midblue] coordinates {(LR (behaviour),0.957) (RF (behaviour),0.967) (HGB (behaviour),0.966) (LR (text),0.974) (Ensemble,0.972)};
 \end{axis}
 \end{tikzpicture}
-\caption{Detection rate at 1\% FPR under the two evaluation protocols}\label{fig:proto}
+\caption{F1-score of each model}\label{fig:f1}
 \end{figure}
 
-\subsection{Malicious Code Embedded in Benign Scripts}
-The mixed subset of MPSD represents a realistic evasion strategy in which a payload is hidden inside a long, legitimate-looking administrative script. In total, 4,064 mixed scripts were evaluated; 138 were excluded because their malicious parent could not be identified. As shown in the first columns of Table~\ref{tab:mixed}, every model trained on standalone scripts detected only 41--53\% of the embedded payloads at the default threshold, the ensemble detecting 46.7\%. This is the most significant weakness revealed by the study. Its cause follows from the interpretability analysis in Section~\ref{sec:interp}: the strongest signals are the overall form of a script and, for the lexical model, its length-normalised n-gram profile. When a few lines of malicious code are surrounded by hundreds of lines of neatly formatted administrative code, both views are dominated by the benign host. Hand-crafted LR performs best in this setting (53.4\%), because its indicator counts contribute additively rather than being overridden by form-based splits as in the tree models.
-
-To mitigate the weakness, and following Fang et al., who included mixed scripts in training~\cite{fang2021}, the training folds were augmented with mixed samples. To prevent leakage, a mixed script was added to the training data of fold $k$ only if both its malicious parent and its benign host belonged to the training folds; on average 2,591 scripts were added per fold. Mixed scripts whose malicious parent lay in fold $k$ were again held out for testing. As Table~\ref{tab:mixed} and Figure~\ref{fig:mixed} show, augmentation raised the detection rate of the ensemble on embedded payloads from 46.7\% to 96.4\%, with 98.3\% of these samples reaching at least the \textsc{Alert} tier; HGB achieved the highest rate (97.4\%). The cost is a modest increase in false alarms on ordinary scripts: the false-positive rate of the ensemble rose from 0.70\% to 1.05\% and its F1-score fell from 0.972 to 0.969. Having seen benign host code inside samples labelled malicious, the model becomes slightly more suspicious of similar benign scripts. Because the tiered policy routes borderline scores to \textsc{Alert} rather than to automatic containment, this trade-off is considered acceptable, and mixed-aware training is recommended for deployment, subject to re-measuring the false-positive rate on local data.
-
-\begin{table}[htbp]
-\centering
-\caption{Embedded-code detection and clean-data performance before and after mixed-aware training}\label{tab:mixed}
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{lcccccc}
-\toprule
-& \multicolumn{2}{c}{\textbf{Mixed detected}} & \multicolumn{2}{c}{\textbf{Clean F1}} & \multicolumn{2}{c}{\textbf{Clean FPR}}\\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
-\textbf{Model} & \textbf{Base} & \textbf{Aug.} & \textbf{Base} & \textbf{Aug.} & \textbf{Base} & \textbf{Aug.}\\
-\midrule
-Hand-crafted + LR  & 53.4\% & 94.1\% & 0.957 & 0.935 & 2.05\% & 3.67\%\\
-Hand-crafted + RF  & 47.1\% & 96.6\% & 0.967 & 0.960 & 0.77\% & 1.51\%\\
-Hand-crafted + HGB & 41.1\% & 97.4\% & 0.966 & 0.960 & 0.67\% & 1.53\%\\
-Char TF-IDF + LR   & 49.0\% & 92.1\% & 0.974 & 0.969 & 0.86\% & 1.12\%\\
-Ensemble           & 46.7\% & 96.4\% & 0.972 & 0.969 & 0.70\% & 1.05\%\\
-\bottomrule
-\end{tabular}
-\end{table}
+Figure~\ref{fig:cm} shows the confusion matrix of the ensemble. Out of 4,302 benign scripts, 4,272 (99.3\%) were correctly classified, and out of 1,875 malicious scripts, 1,803 (96.2\%) were correctly detected.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}
-\begin{axis}[xbar, width=0.8\textwidth, height=7.0cm, bar width=0.28cm, xmin=0, xmax=108,
-%<<BEGIN mixed_coords>>
-symbolic y coords={Ensemble,TF-IDF + LR,HC + HGB,HC + RF,HC + LR},
-%<<END mixed_coords>>
-  ytick=data, xlabel={Embedded payloads detected (\%)}, enlarge y limits=0.14,
-  legend style={at={(0.5,1.02)}, anchor=south, legend columns=2, /tikz/every even column/.append style={column sep=0.5cm}}, xmajorgrids, grid style={black!10},
-  nodes near coords, every node near coord/.append style={font=\scriptsize}, nodes near coords align={horizontal}]
-%<<BEGIN mixed>>
-\addplot[fill=lightblue,draw=lightblue] coordinates {(46.7,{Ensemble}) (49.0,{TF-IDF + LR}) (41.1,{HC + HGB}) (47.1,{HC + RF}) (53.4,{HC + LR})};
-\addplot[fill=navy,draw=navy] coordinates {(96.4,{Ensemble}) (92.1,{TF-IDF + LR}) (97.4,{HC + HGB}) (96.6,{HC + RF}) (94.1,{HC + LR})};
-%<<END mixed>>
-\legend{Trained on standalone scripts, Mixed-aware training}
-\end{axis}
+\begin{tikzpicture}[cell/.style={minimum width=3.0cm, minimum height=1.5cm, draw=white, line width=1.5pt, align=center}]
+  \node[cell, fill=navy, text=white] at (0,0) {4,272\\(99.3\%)};
+  \node[cell, fill=paleblue] at (3.0,0) {30\\(0.7\%)};
+  \node[cell, fill=paleblue] at (0,-1.5) {72\\(3.8\%)};
+  \node[cell, fill=navy, text=white] at (3.0,-1.5) {1,803\\(96.2\%)};
+  \node[anchor=east] at (-1.6,0) {Benign};
+  \node[anchor=east] at (-1.6,-1.5) {Malicious};
+  \node at (0,0.95) {Benign};
+  \node at (3.0,0.95) {Malicious};
+  \node[font=\bfseries] at (1.5,1.5) {Predicted};
+  \node[font=\bfseries, rotate=90] at (-4.0,-0.75) {Actual};
 \end{tikzpicture}
-\caption{Detection of malicious code embedded in benign scripts before and after mixed-aware training}\label{fig:mixed}
+\caption{Confusion matrix of the ensemble model}\label{fig:cm}
 \end{figure}
 
-\subsection{Interpretability}\label{sec:interp}
-Figure~\ref{fig:imp} lists the most influential hand-crafted features of the random forest. The five most important are the whitespace ratio, the number of lines, the special-character ratio, the mean line length and the digit ratio, all of which describe the form of the code rather than particular commands. The interpretation is straightforward: malicious scripts in the corpus are typically dense one-liners or short blocks with long lines, little indentation, many special characters and long runs of digits, for example shellcode stored as byte arrays, whereas administrative scripts are spread over many short, indented lines. The first behavioural feature, the Win32 API/injection indicator group, ranks eighth. The dominance of form-related features has two sides. Such features are inexpensive and effective, but an attacker can alter them simply by reformatting the code or wrapping it in a long benign script, which is precisely the weakness examined in the previous subsection.
+\subsection{Effect of Removing Duplicates}
+To see why data cleaning matters, the ensemble was also tested on the original data with duplicates and a simple random split. In that case its F1-score rose to 0.988 and the share of missed malicious scripts fell from 3.8\% to 1.7\%. This higher result is misleading, because the model was partly being tested on copies of scripts it had already seen. In other words, without cleaning, the number of attacks missed in real use would be underestimated by more than half. This agrees with the warnings of Arp et al.~\cite{arp2022} and Pendlebury et al.~\cite{pendlebury2019}.
 
-The lexical model provides a complementary and more behavioural explanation. Among its largest positive coefficients are n-grams such as ``\texttt{iex}'', ``\texttt{(new-}'', ``\texttt{w-ob}'', ``\texttt{.exe}'' and ``\texttt{dow}'', which are fragments of the Invoke-Expression alias, of New-Object, of executable file names and of download methods. The strongest benign n-grams, such as ``\texttt{name}'' and sequences of a brace followed by a variable, reflect well-structured code blocks and named parameters. For an analyst, however, the most useful explanation is the list of \attck{} techniques attached to every alert by the response engine, because it describes behaviour rather than model internals. Model-agnostic attribution methods such as SHAP~\cite{lundberg2017} could provide per-script explanations in a future version.
+\subsection{Malicious Code Hidden Inside Normal Scripts}
+The models were also tested on the ``mixed'' scripts, where malicious code is hidden inside a long normal script. This was the main weakness found: the ensemble detected only 46.7\% of these scripts, because the large amount of normal code hides the small malicious part. When examples of mixed scripts were added to the training data, detection rose to 96.4\%, while false alarms on normal scripts increased only slightly (from 0.70\% to 1.05\%). Training with such examples is therefore recommended.
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[xbar, width=0.62\textwidth, height=8.2cm, bar width=0.34cm, xmin=0, xmax=0.19,
-%<<BEGIN imp_coords>>
-symbolic y coords={Plus-sign ratio,Upper-case ratio,Longest token,Variable density,Win32 API indicators,Longest line,Brace ratio,Digit ratio,Mean line length,Special-char. ratio,Line count,Whitespace ratio},
-%<<END imp_coords>>
-  ytick=data, xlabel={Mean decrease in impurity}, enlarge y limits=0.05, xmajorgrids, grid style={black!10},
-  nodes near coords, every node near coord/.append style={font=\scriptsize, /pgf/number format/fixed, /pgf/number format/precision=3}, nodes near coords align={horizontal},
-  xticklabel style={/pgf/number format/fixed, /pgf/number format/precision=2}]
-%<<BEGIN imp>>
-\addplot[fill=midblue,draw=midblue] coordinates {
-  (0.019,{Plus-sign ratio}) (0.021,{Upper-case ratio}) (0.023,{Longest token})
-  (0.026,{Variable density}) (0.049,{Win32 API indicators}) (0.057,{Longest line})
-  (0.071,{Brace ratio}) (0.074,{Digit ratio}) (0.097,{Mean line length})
-  (0.108,{Special-char. ratio}) (0.146,{Line count}) (0.164,{Whitespace ratio})
-};
-%<<END imp>>
-\end{axis}
-\end{tikzpicture}
-\caption{Twelve most important hand-crafted features of the random forest}\label{fig:imp}
-\end{figure}
-
-\subsection{Error Analysis}
-The 30 false positives and 72 false negatives of the ensemble were examined in aggregate, without reproducing their content, and two distinct patterns emerged. The false positives are long, dual-use tools. Their median length is 47,580 characters, more than twenty times that of a typical benign script, and on average 3.13 indicator groups fire per script, compared with 0.32 for correctly classified benign scripts; 70\% use reflection and 63\% call Win32 APIs. Their function names reveal code-signing helpers, memory and logon-session inspection utilities, DLL-loading wrappers and penetration-testing modules that the dataset labels as benign. Such scripts are genuinely ambiguous, since the same code that an administrator uses for diagnostics is used by attackers for injection.
-
-The false negatives, by contrast, resemble ordinary administration. They contain few behavioural indicators (1.36 groups on average, with 21\% triggering none). Typical examples write registry values, create a scheduled task with an innocuous name, collect the user and host name, or build strings from character codes. Whether such actions are malicious depends on context, such as who ran them, from where and what followed, which is not visible in the script text alone. The tiered policy mitigates both types of error: 45.8\% of the missed malicious scripts still score at least 0.30 and therefore raise an \textsc{Alert} instead of passing silently, while 60\% of the false positives fall below the \textsc{Contain} threshold and generate only a ticket. Adding context from process ancestry or network telemetry, as in provenance-based triage~\cite{hassan2019,hassan2020}, is the most promising way of reducing both error types further.
-
-\subsection{Automated Response Simulation}\label{sec:resp}
-To evaluate the complete loop from detection to response, the ensemble was trained on four of the five family-aware folds, and the fifth fold was replayed as a stream of synthetic Event ID 4104 records. Each record carried a script-block identifier, host name, user, process identifier and, for 60\% of events, a file path. The replay used the base ensemble trained on standalone scripts and therefore measures the response loop on ordinary scripts; the embedded-code case was examined above. Table~\ref{tab:replay} summarises the outcome.
+\subsection{Automated Response Results}
+To test the full system, the ensemble was trained on four parts of the data, and the fifth part (1,233 scripts it had never seen) was sent through the response system as Windows log events. Table~\ref{tab:response} shows the outcome. Most malicious scripts were stopped automatically, very few benign scripts were blocked, and a typical script was processed in about 91 milliseconds. The most common attacker behaviours found were running code with PowerShell (T1059.001), loading code into memory (T1620), code injection (T1055) and downloading tools (T1105).
 
 \begin{table}[htbp]
 \centering
-\caption{Outcome of replaying an unseen fold through the response engine (dry-run)}\label{tab:replay}
+\caption{Results of the automated response test}\label{tab:response}
 \begin{tabular}{lr}
 \toprule
-\textbf{Measure} & \textbf{Value}\\
+\textbf{Measure} & \textbf{Result}\\
 \midrule
-Training scripts (folds 1--4) / replayed events (fold 5) & 4,944 / 1,233\\
-Replayed malicious / benign events & 373 / 860\\
-Malicious: \textsc{Allow} / \textsc{Alert} / \textsc{Contain} / \textsc{Isolate} & 11 / 22 / 178 / 162\\
-Benign: \textsc{Allow} / \textsc{Alert} / \textsc{Contain} / \textsc{Isolate} & 851 / 7 / 2 / 0\\
-Malicious events contained (\textsc{Contain} or \textsc{Isolate}) & 91.15\%\\
-Malicious events at least alerted & 97.05\%\\
-Benign events wrongly contained & 0.23\%\\
-Benign events raised as \textsc{Alert} & 0.81\%\\
-Isolation requests awaiting analyst approval & 162\\
-Mean number of actions per contained event & 5.41\\
-Latency per event: median / mean / 95th percentile & 90.7 / 100.6 / 144.3 ms\\
-Throughput (single process) & 9.9 events/s\\
+Scripts tested (malicious / benign) & 373 / 860\\
+Malicious scripts stopped automatically & 91.2\%\\
+Malicious scripts at least alerted & 97.1\%\\
+Benign scripts wrongly blocked & 0.23\% (2 scripts)\\
+Benign scripts sent as alerts & 0.81\%\\
+Average time per script (median) & 90.7 ms\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Of the 373 malicious events, 340 (91.2\%) were contained automatically, 178 at the \textsc{Contain} tier and 162 at the \textsc{Isolate} tier pending analyst approval, and a further 22 raised an \textsc{Alert}; only 11 (2.9\%) passed without any signal reaching an analyst. Of the 860 benign events, 851 (99.0\%) were allowed silently, seven produced an alert and two (0.23\%) were wrongly contained (Figure~\ref{fig:tiers}). Figure~\ref{fig:hist} explains why the tiers work: the out-of-fold scores of benign scripts are concentrated near zero and those of malicious scripts near one, and the \textsc{Alert} band between 0.30 and 0.70 captures most genuinely uncertain cases, so automated containment is applied almost exclusively where the model is confident. The large number of isolation requests reflects the prevalence of process-injection loaders in the dataset; in practice, approvals would be grouped by host, because several events usually originate from the same compromised machine.
+\subsection{Limitations}
+The study has some limitations. Only one public dataset was used, so results should be checked again on real company data. The system looks only at the script text and not at other information such as which program started the script. Most mistakes were made on scripts that can be used for both good and bad purposes, such as system tools that also use low-level Windows functions. Finally, the response actions were tested in a safe simulation, not on a real network.
 
-Every contained event carried \attck{} context. The techniques attached most frequently were T1059.001 (187 events), T1620 (175), T1055 (174) and T1105 (134), which corresponds to the shellcode-loader and download-cradle families that dominate the malicious data. The median latency of 90.7\,ms per event, dominated by feature extraction and scoring, allows a single process to handle roughly 35,700 script blocks per hour. Longer scripts take more time, as the 95th percentile of 144.3\,ms shows, but remain well below the time an attacker needs to move laterally. Latency was measured in a shared four-core container while other experiments were running and is therefore a conservative estimate.
+%% ---------------------------------------------------------------------
+\section{Conclusion}
+%% ---------------------------------------------------------------------
+This case study showed that machine learning can detect malicious PowerShell scripts accurately and support a fast automatic response. After removing duplicates and wrong labels from the MPSD dataset, an ensemble of a text-based logistic regression model and a behaviour-based random forest reached an F1-score of 0.972, detecting 96.2\% of malicious scripts with only 0.7\% false alarms. The automated response system stopped 91.2\% of malicious scripts in a test on unseen data, wrongly blocked only 0.23\% of benign scripts, and needed about 91 milliseconds per script. Two lessons stand out: datasets must be checked for duplicates, otherwise results look better than they are, and malicious code hidden inside normal scripts needs special training data. In future, the system can be improved by testing it on real company logs, scanning scripts before they run using AMSI, adding information about running processes, and using large language models to explain alerts to analysts~\cite{wang2026}. Overall, simple and explainable models together with a careful, human-supervised response policy offer a practical defence against PowerShell attacks, in line with expert guidance to keep PowerShell but monitor it closely~\cite{nsa2022}.
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=0.86\textwidth, height=6.4cm, ymode=log, log origin=infty, xmin=0, xmax=1, ymin=0.8, ymax=20000,
-  xlabel={Ensemble risk score (out-of-fold)}, ylabel={Number of scripts (log scale)},
-  legend style={at={(0.5,1.03)}, anchor=south, legend columns=2, /tikz/every even column/.append style={column sep=0.5cm}}, ymajorgrids, grid style={black!10}]
-%<<BEGIN hist>>
-\addplot[ybar interval,fill=lightblue,draw=lightblue] coordinates {
-  (0,3296) (0.025,489) (0.05,181) (0.075,108) (0.1,56) (0.125,28) (0.15,25) (0.175,15)
-  (0.2,16) (0.225,12) (0.25,8) (0.275,11) (0.3,9) (0.325,3) (0.35,2) (0.375,3) (0.4,2)
-  (0.425,2) (0.45,2) (0.475,4) (0.5,2) (0.525,2) (0.55,3) (0.575,2) (0.6,1) (0.625,3)
-  (0.65,4) (0.675,1) (0.7,1) (0.725,0) (0.75,2) (0.775,0) (0.8,1) (0.825,2) (0.85,3)
-  (0.875,2) (0.9,1) (0.925,0) (0.95,0) (0.975,0) (1,0)
-};
-\addplot[const plot,navy,thick] coordinates {
-  (0,3) (0.025,1) (0.05,6) (0.075,7) (0.1,6) (0.125,0.8) (0.15,1) (0.175,4) (0.2,3)
-  (0.225,2) (0.25,2) (0.275,4) (0.3,7) (0.325,2) (0.35,1) (0.375,6) (0.4,8) (0.425,3)
-  (0.45,1) (0.475,5) (0.5,6) (0.525,6) (0.55,4) (0.575,3) (0.6,9) (0.625,3) (0.65,4)
-  (0.675,2) (0.7,4) (0.725,8) (0.75,2) (0.775,1) (0.8,11) (0.825,7) (0.85,7) (0.875,8)
-  (0.9,9) (0.925,18) (0.95,43) (0.975,1648) (1,1648)
-};
-%<<END hist>>
-\draw[black, dashed] (axis cs:0.30,0.8) -- (axis cs:0.30,20000);
-\draw[black, dashed] (axis cs:0.70,0.8) -- (axis cs:0.70,20000);
-\draw[black, dashed] (axis cs:0.95,0.8) -- (axis cs:0.95,20000);
-\node[font=\scriptsize, rotate=90, anchor=south west] at (axis cs:0.30,1200) {\textsc{Alert}};
-\node[font=\scriptsize, rotate=90, anchor=south west] at (axis cs:0.70,1200) {\textsc{Contain}};
-\node[font=\scriptsize, rotate=90, anchor=south west] at (axis cs:0.95,1200) {\textsc{Isolate}$^\ast$};
-\legend{Benign scripts, Malicious scripts}
-\end{axis}
-\end{tikzpicture}
-\caption{Distribution of out-of-fold ensemble scores with the policy thresholds ($^\ast$isolation also requires a high-impact technique)}\label{fig:hist}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[xbar stacked, width=0.86\textwidth, height=4.4cm, bar width=0.7cm, xmin=0, xmax=100,
-  symbolic y coords={Benign,Malicious}, ytick=data, yticklabels={Benign (n = 860),Malicious (n = 373)},
-  enlarge y limits=0.5, xlabel={Share of replayed events (\%)},
-  legend style={at={(0.5,-0.42)}, anchor=north, legend columns=4, /tikz/every even column/.append style={column sep=0.4cm}}, area legend]
-%<<BEGIN tiers>>
-\addplot[fill=paleblue,draw=white] coordinates {(98.95,Benign) (2.95,Malicious)};
-\addplot[fill=lightblue,draw=white] coordinates {(0.81,Benign) (5.90,Malicious)};
-\addplot[fill=midblue,draw=white] coordinates {(0.23,Benign) (47.72,Malicious)};
-\addplot[fill=navy,draw=white] coordinates {(0.00,Benign) (43.43,Malicious)};
-%<<END tiers>>
-\legend{\textsc{Allow}, \textsc{Alert}, \textsc{Contain}, \textsc{Isolate}}
-\end{axis}
-\end{tikzpicture}
-\caption{Response tiers assigned to benign and malicious events in the replay experiment}\label{fig:tiers}
-\end{figure}
-
-\subsection{Comparison with Published Work}
-Table~\ref{tab:compare} places the results alongside published work. On the same corpus, the accuracy obtained under the stricter family-aware protocol (98.35\%) is close to the 98.93\% reported by Fang et al.\ with random splits, although the present models are simpler and use neither AST parsing nor embeddings; under a naive split comparable to theirs, the ensemble reaches 98.83\%. The comparison with Hendler et al.\ is only indicative, because their data come from real AMSI telemetry with much greater benign variety, which is a harder and more realistic setting.
-
-\begin{table}[htbp]
-\centering
-\caption{Indicative comparison with published PowerShell detectors (datasets and protocols differ, so the figures are not directly comparable)}\label{tab:compare}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
-\toprule
-\textbf{Study} & \textbf{Data and protocol} & \textbf{Reported result}\\
-\midrule
-Fang et al.~\cite{fang2021} & MPSD; random five-fold CV & Accuracy 98.93\% (original), 97.76\% (mixed)\\
-Song et al.~\cite{song2021} & Own corpus; token and AST features & Detection rate $\approx$98\%\\
-Hendler et al.~\cite{hendler2020} & AMSI data from Microsoft & TPR $\approx$90\% at FPR $<$ 0.1\%\\
-This work (ensemble) & MPSD, de-duplicated; family-aware five-fold CV & Accuracy 98.35\%, F1 0.972, TPR 97.39\% at 1\% FPR\\
-This work (ensemble) & MPSD raw; random five-fold CV & Accuracy 98.83\%, F1 0.988\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Limitations and Threats to Validity}\label{sec:limits}
-Several limitations should be noted. MPSD is a single public corpus with a limited number of malicious families, and its benign scripts come mainly from public repositories; enterprise environments contain in-house scripts that may look different, so the false-positive rate must be re-measured on local data before deployment. The scripts carry no reliable timestamps, which prevented a temporal split of the kind recommended by Pendlebury et al.~\cite{pendlebury2019}; family-aware splitting addresses near-duplicates but not concept drift. The detector sees only script text, whereas context such as the parent process, user, network connections and command-line arguments, which EDR products collect, would help with the ambiguous cases identified in the error analysis. An adversary able to query the model could search for variants that lower the score~\cite{goodfellow2015}; using AMSI or Event ID 4104 output, which already removes several obfuscation layers, combining lexical and behavioural evidence and keeping thresholds conservative reduce this risk without eliminating it. Finally, response actions were simulated in dry-run mode on synthetic event metadata, so the operational cost of terminating processes or isolating hosts in a production network was not measured.
-
-%% =====================================================================
-\section{Conclusion and Future Work}\label{sec:conc}
-%% =====================================================================
-This case study set out to build and evaluate an AI-based system that detects malicious PowerShell scripts and responds to them automatically, while assessing its performance realistically. A careful audit of the MPSD corpus proved essential: more than half of the malicious files were duplicates, a small number of files carried contradictory labels, byte-order marks offered a spurious shortcut, and the remaining malicious scripts formed only 816 structural families. Under a family-aware evaluation that respects these properties, a lightweight ensemble of a character n-gram logistic-regression model and a random forest on 33 interpretable features achieved an F1-score of 0.972, a ROC-AUC of 0.998 and a true-positive rate of 97.39\% at a 1\% false-positive rate. A naive random split would have understated the miss rate by a factor of about 2.3, which is a caution for comparisons with published results. The study also revealed a clear weakness: malicious code hidden in long benign scripts evaded models trained on standalone samples about half of the time, because whole-script form features are diluted by the benign host. Adding such examples to training raised the detection of embedded payloads to 96.4\%, at the cost of a small increase in false positives on ordinary scripts.
-
-Detection was then linked to action. The tiered response engine consumes the Event ID 4104 records that Windows already produces, attaches \attck{} techniques and defanged indicators to every decision, and scales its response from logging to process termination, quarantine and network blocking, with host isolation reserved for analyst approval. In a replay of unseen scripts it contained 91.2\% of malicious events, wrongly contained 0.23\% of benign events and required a median of 90.7\,ms per event. These results indicate that interpretable machine learning combined with a proportionate and auditable response policy is a practical means of defending against living-off-the-land PowerShell attacks, consistent with current guidance to retain PowerShell while monitoring it closely~\cite{nsa2022,nist2025}.
-
-Several extensions would strengthen the system. It should be validated on enterprise telemetry with a temporal split in order to measure concept drift, and retrained periodically using analyst feedback. Scoring individual functions and script blocks in addition to the whole script would prevent a small malicious section from being diluted by a large benign host. AST-based features and pre-trained code embeddings~\cite{hendler2020,fang2021} could be compared with the present features under the same family-aware protocol. Integrating the model as an AMSI provider would allow high-confidence scripts to be blocked before execution. Process-tree and network context from EDR provenance graphs could resolve the dual-use cases that account for most errors~\cite{hassan2020}. An LLM could act as a second-stage assistant that explains \textsc{Alert}-tier scripts in natural language~\cite{wang2026}, with the fast classical model retained as the first-line filter. Finally, robustness against adaptive adversaries should be evaluated and improved through adversarially augmented training.
-
-%% =====================================================================
-%%  References (IEEE style, numbered in order of first citation)
-%% =====================================================================
-\clearpage
-\phantomsection
-\addcontentsline{toc}{section}{References}
+%% ---------------------------------------------------------------------
+%%  References
+%% ---------------------------------------------------------------------
 \setstretch{1.05}
 \begin{thebibliography}{99}
+
 \bibitem{wueest2017} C.~Wueest and H.~Anand, ``Living off the land and fileless attack techniques,'' Symantec Internet Security Threat Report (ISTR) Special Report, Symantec Corp., Jul. 2017.
-
-
 
 \bibitem{wueest2016} C.~Wueest, ``The increased use of PowerShell in attacks,'' Symantec Security Response White Paper, Symantec Corp., Oct. 2016.
 
-
-
-\bibitem{mitre_t1059} The MITRE Corporation, ``Command and Scripting Interpreter: PowerShell (T1059.001),'' \emph{MITRE ATT\&CK Enterprise Matrix}. [Online]. Available: \url{https://attack.mitre.org/techniques/T1059/001/}
-
-
+\bibitem{mitre_t1059} The MITRE Corporation, ``Command and Scripting Interpreter: PowerShell (T1059.001),'' \emph{MITRE ATT\&CK}. [Online]. Available: \url{https://attack.mitre.org/techniques/T1059/001/}
 
 \bibitem{redcanary2025} Red Canary, ``2025 Threat Detection Report,'' Red Canary Inc., Denver, CO, USA, 2025. [Online]. Available: \url{https://redcanary.com/threat-detection-report/}
 
-
-
 \bibitem{nsa2022} National Security Agency, Cybersecurity and Infrastructure Security Agency, New Zealand National Cyber Security Centre and UK National Cyber Security Centre, ``Keeping PowerShell: Security measures to use and embrace,'' Joint Cybersecurity Information Sheet, Jun. 2022.
-
-
 
 \bibitem{bohannon2016} D.~Bohannon, ``Invoke-Obfuscation: PowerShell command and script obfuscator,'' presented at DerbyCon 6.0, Louisville, KY, USA, 2016. [Online]. Available: \url{https://github.com/danielbohannon/Invoke-Obfuscation}
 
-
-
-\bibitem{bohannon2017} D.~Bohannon and L.~Holmes, ``Revoke-Obfuscation: PowerShell obfuscation detection using science,'' White Paper, Black Hat USA, Las Vegas, NV, USA, Jul. 2017.
-
-
-
 \bibitem{hassan2019} W.~U. Hassan, S.~Guo, D.~Li, Z.~Chen, K.~Jee, Z.~Li and A.~Bates, ``NoDoze: Combatting threat alert fatigue with automated provenance triage,'' in \emph{Proc. Network and Distributed System Security Symp. (NDSS)}, San Diego, CA, USA, 2019.
-
-
-
-\bibitem{patsakis2024} C.~Patsakis, F.~Casino and N.~Lykousas, ``Assessing LLMs in malicious code deobfuscation of real-world malware campaigns,'' \emph{Expert Systems with Applications}, vol.~256, Art. no.~124912, 2024.
-
-
-
-\bibitem{wang2026} M.~Wang, E.~Topolovec, B.~Arana, N.~V.~P.~S.~G.~C.~Kuladeep, Z.~Xi, G.~Yan, X.~Shu, S.~D.~Stoller and P.~Yang, ``Detection and explanation of PowerShell malware with large language models,'' Manuscript, Binghamton University, IBM T.~J. Watson Research Center and Stony Brook University, 2026. [Online]. Available: \url{https://www3.cs.stonybrook.edu/~stoller/papers/powershell-malware-2026.pdf}
-
-
 
 \bibitem{nist2025} A.~Nelson, S.~Rekhi, M.~Souppaya and K.~Scarfone, ``Incident response recommendations and considerations for cybersecurity risk management: A CSF 2.0 community profile,'' NIST Special Publication 800-61 Rev.~3, National Institute of Standards and Technology, Gaithersburg, MD, USA, Apr. 2025.
 
-
-
-\bibitem{fang2021} Y.~Fang, X.~Zhou and C.~Huang, ``Effective method for detecting malicious PowerShell scripts based on hybrid features,'' \emph{Neurocomputing}, vol.~448, pp.~30--39, 2021, doi: 10.1016/j.neucom.2021.03.117.
-
-
-
 \bibitem{ms_logging} Microsoft, ``about\_Logging\_Windows,'' PowerShell Documentation, Microsoft Learn. [Online]. Available: \url{https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows}
-
-
 
 \bibitem{ms_amsi} Microsoft, ``Antimalware Scan Interface (AMSI),'' Win32 Apps Documentation, Microsoft Learn. [Online]. Available: \url{https://learn.microsoft.com/en-us/windows/win32/amsi/antimalware-scan-interface-portal}
 
-
-
 \bibitem{strom2018} B.~E. Strom, A.~Applebaum, D.~P. Miller, K.~C. Nickels, A.~G. Pennington and C.~B. Thomas, ``MITRE ATT\&CK: Design and philosophy,'' The MITRE Corporation, McLean, VA, USA, Tech. Rep. MTR180360, 2018.
 
-
+\bibitem{bohannon2017} D.~Bohannon and L.~Holmes, ``Revoke-Obfuscation: PowerShell obfuscation detection using science,'' White Paper, Black Hat USA, Las Vegas, NV, USA, Jul. 2017.
 
 \bibitem{ugarte2019} D.~Ugarte, D.~Maiorca, F.~Cara and G.~Giacinto, ``PowerDrive: Accurate de-obfuscation and analysis of PowerShell malware,'' in \emph{Detection of Intrusions and Malware, and Vulnerability Assessment (DIMVA 2019)}, Lecture Notes in Computer Science, vol.~11543. Cham, Switzerland: Springer, 2019, pp.~240--259.
 
-
-
 \bibitem{li2019} Z.~Li, Q.~A. Chen, C.~Xiong, Y.~Chen, T.~Zhu and H.~Yang, ``Effective and light-weight deobfuscation and semantic-aware attack detection for PowerShell scripts,'' in \emph{Proc. ACM SIGSAC Conf. Computer and Communications Security (CCS)}, London, UK, 2019, pp.~1831--1847.
 
-
-
-\bibitem{xiong2022} C.~Xiong, Z.~Li, Y.~Chen, T.~Zhu, J.~Wang, H.~Yang and W.~Ruan, ``Generic, efficient, and effective deobfuscation and semantic-aware attack detection for PowerShell scripts,'' \emph{Frontiers of Information Technology \& Electronic Engineering}, vol.~23, no.~3, pp.~361--381, 2022, doi: 10.1631/FITEE.2000436.
-
-
+\bibitem{xiong2022} C.~Xiong, Z.~Li, Y.~Chen, T.~Zhu, J.~Wang, H.~Yang and W.~Ruan, ``Generic, efficient, and effective deobfuscation and semantic-aware attack detection for PowerShell scripts,'' \emph{Frontiers of Information Technology \& Electronic Engineering}, vol.~23, no.~3, pp.~361--381, 2022.
 
 \bibitem{tsai2023} M.-H. Tsai, C.-C. Lin, Z.-G. He, W.-C. Yang and C.-L. Lei, ``PowerDP: De-obfuscating and profiling malicious PowerShell commands with multi-label classifiers,'' \emph{IEEE Access}, vol.~11, 2023.
 
-
-
 \bibitem{li2024} R.~Li, C.~Zhang, H.~Chai, L.~Ying, H.~Duan and J.~Tao, ``PowerPeeler: A precise and general dynamic deobfuscation method for PowerShell scripts,'' in \emph{Proc. ACM SIGSAC Conf. Computer and Communications Security (CCS '24)}, Salt Lake City, UT, USA, 2024.
 
-
+\bibitem{patsakis2024} C.~Patsakis, F.~Casino and N.~Lykousas, ``Assessing LLMs in malicious code deobfuscation of real-world malware campaigns,'' \emph{Expert Systems with Applications}, vol.~256, Art. no.~124912, 2024.
 
 \bibitem{hendler2018} D.~Hendler, S.~Kels and A.~Rubin, ``Detecting malicious PowerShell commands using deep neural networks,'' in \emph{Proc. ACM Asia Conf. Computer and Communications Security (ASIACCS)}, Incheon, Republic of Korea, 2018, pp.~187--197.
 
-
-
 \bibitem{hendler2020} D.~Hendler, S.~Kels and A.~Rubin, ``AMSI-based detection of malicious PowerShell code using contextual embeddings,'' in \emph{Proc. 15th ACM Asia Conf. Computer and Communications Security (ASIA CCS '20)}, Taipei, Taiwan, 2020, pp.~679--693.
-
-
 
 \bibitem{ms_blog2019} Microsoft Defender Research Team, ``Deep learning rises: New methods for detecting malicious PowerShell,'' Microsoft Security Blog, Sep. 3, 2019. [Online]. Available: \url{https://www.microsoft.com/en-us/security/blog/2019/09/03/deep-learning-rises-new-methods-for-detecting-malicious-powershell/}
 
-
-
 \bibitem{rusak2018} G.~Rusak, A.~Al-Dujaili and U.-M. O'Reilly, ``AST-based deep learning for detecting malicious PowerShell,'' in \emph{Proc. ACM SIGSAC Conf. Computer and Communications Security (CCS)}, Toronto, ON, Canada, 2018, pp.~2276--2278.
-
-
 
 \bibitem{song2021} J.~Song, J.~Kim, S.~Choi, J.~Kim and I.~Kim, ``Evaluations of AI-based malicious PowerShell detection with feature optimizations,'' \emph{ETRI Journal}, vol.~43, no.~3, pp.~549--560, 2021.
 
-
-
 \bibitem{mimura2021} M.~Mimura and Y.~Tajiri, ``Static detection of malicious PowerShell based on word embeddings,'' \emph{Internet of Things}, vol.~15, Art. no.~100404, 2021.
 
-
+\bibitem{fang2021} Y.~Fang, X.~Zhou and C.~Huang, ``Effective method for detecting malicious PowerShell scripts based on hybrid features,'' \emph{Neurocomputing}, vol.~448, pp.~30--39, 2021.
 
 \bibitem{saxe2017} J.~Saxe and K.~Berlin, ``eXpose: A character-level convolutional neural network with embeddings for detecting malicious URLs, file paths and registry keys,'' arXiv preprint arXiv:1702.08568, 2017.
 
-
-
 \bibitem{ucci2019} D.~Ucci, L.~Aniello and R.~Baldoni, ``Survey of machine learning techniques for malware analysis,'' \emph{Computers \& Security}, vol.~81, pp.~123--147, 2019.
-
-
 
 \bibitem{gibert2020} D.~Gibert, C.~Mateu and J.~Planes, ``The rise of machine learning for detection and classification of malware: Research developments, trends and challenges,'' \emph{Journal of Network and Computer Applications}, vol.~153, Art. no.~102526, 2020.
 
-
+\bibitem{wang2026} M.~Wang, E.~Topolovec, B.~Arana, N.~V.~P.~S.~G.~C.~Kuladeep, Z.~Xi, G.~Yan, X.~Shu, S.~D.~Stoller and P.~Yang, ``Detection and explanation of PowerShell malware with large language models,'' Manuscript, Binghamton University, IBM T.~J. Watson Research Center and Stony Brook University, 2026.
 
 \bibitem{sommer2010} R.~Sommer and V.~Paxson, ``Outside the closed world: On using machine learning for network intrusion detection,'' in \emph{Proc. IEEE Symp. Security and Privacy}, Oakland, CA, USA, 2010, pp.~305--316.
 
-
-
 \bibitem{arp2022} D.~Arp, E.~Quiring, F.~Pendlebury, A.~Warnecke, F.~Pierazzi, C.~Wressnegger, L.~Cavallaro and K.~Rieck, ``Dos and don'ts of machine learning in computer security,'' in \emph{Proc. 31st USENIX Security Symp.}, Boston, MA, USA, 2022, pp.~3971--3988.
-
-
 
 \bibitem{pendlebury2019} F.~Pendlebury, F.~Pierazzi, R.~Jordaney, J.~Kinder and L.~Cavallaro, ``TESSERACT: Eliminating experimental bias in malware classification across space and time,'' in \emph{Proc. 28th USENIX Security Symp.}, Santa Clara, CA, USA, 2019, pp.~729--746.
 
-
-
-\bibitem{saito2015} T.~Saito and M.~Rehmsmeier, ``The precision-recall plot is more informative than the ROC plot when evaluating binary classifiers on imbalanced datasets,'' \emph{PLoS ONE}, vol.~10, no.~3, Art. no.~e0118432, 2015.
-
-
-
 \bibitem{islam2019} C.~Islam, M.~A. Babar and S.~Nepal, ``A multi-vocal review of security orchestration,'' \emph{ACM Computing Surveys}, vol.~52, no.~2, Art. no.~37, 2019.
-
-
 
 \bibitem{hassan2020} W.~U. Hassan, A.~Bates and D.~Marino, ``Tactical provenance analysis for endpoint detection and response systems,'' in \emph{Proc. IEEE Symp. Security and Privacy (S\&P)}, San Francisco, CA, USA, 2020, pp.~1172--1189.
 
-
-
-\bibitem{goodfellow2015} I.~J. Goodfellow, J.~Shlens and C.~Szegedy, ``Explaining and harnessing adversarial examples,'' in \emph{Proc. Int. Conf. Learning Representations (ICLR)}, San Diego, CA, USA, 2015.
-
-
-
 \bibitem{salton1988} G.~Salton and C.~Buckley, ``Term-weighting approaches in automatic text retrieval,'' \emph{Information Processing \& Management}, vol.~24, no.~5, pp.~513--523, 1988.
 
-
-
-\bibitem{shannon1948} C.~E. Shannon, ``A mathematical theory of communication,'' \emph{Bell System Technical Journal}, vol.~27, no.~3, pp.~379--423, 1948.
-
-
-
-\bibitem{pedregosa2011} F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel, M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos, D.~Cournapeau, M.~Brucher, M.~Perrot and {\'E}.~Duchesnay, ``Scikit-learn: Machine learning in Python,'' \emph{Journal of Machine Learning Research}, vol.~12, pp.~2825--2830, 2011.
-
-
+\bibitem{pedregosa2011} F.~Pedregosa \emph{et al.}, ``Scikit-learn: Machine learning in Python,'' \emph{Journal of Machine Learning Research}, vol.~12, pp.~2825--2830, 2011.
 
 \bibitem{breiman2001} L.~Breiman, ``Random forests,'' \emph{Machine Learning}, vol.~45, no.~1, pp.~5--32, 2001.
 
-
-
 \bibitem{ke2017} G.~Ke, Q.~Meng, T.~Finley, T.~Wang, W.~Chen, W.~Ma, Q.~Ye and T.-Y. Liu, ``LightGBM: A highly efficient gradient boosting decision tree,'' in \emph{Advances in Neural Information Processing Systems 30 (NeurIPS)}, 2017, pp.~3146--3154.
-
-
 
 \bibitem{kohavi1995} R.~Kohavi, ``A study of cross-validation and bootstrap for accuracy estimation and model selection,'' in \emph{Proc. 14th Int. Joint Conf. Artificial Intelligence (IJCAI)}, Montreal, QC, Canada, 1995, pp.~1137--1143.
 
-
-
-\bibitem{lundberg2017} S.~M. Lundberg and S.-I. Lee, ``A unified approach to interpreting model predictions,'' in \emph{Advances in Neural Information Processing Systems 30 (NeurIPS)}, 2017, pp.~4765--4774.
 \end{thebibliography}
 
 \end{document}
