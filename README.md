@@ -9,7 +9,8 @@ Cyber Security case study (Unit 4). The repository holds:
   - `response.py`: tiered response engine (ALLOW / ALERT / CONTAIN / ISOLATE) for Event ID 4104 records, with ATT&CK mapping, defanged IOCs, dry-run actions and a JSONL audit log
 - `experiments/` — scripts that produce every number and figure in the report
 - `results/` — metrics (`metrics.json`, `response_summary.json`), out-of-fold scores and figures
-- `report/` — the report generator (`build_report.js`) and the generated `Report.docx` / `Report.pdf`
+- `report/main.tex` — the report as a single self-contained LaTeX file for Overleaf (figures drawn with TikZ/pgfplots, bibliography embedded); `report/main.pdf` is the compiled version
+- `report/update_plot_data.py` — refreshes the plot data embedded in `main.tex` from `results/` and orders the references by first citation
 - `tests/` — unit tests
 
 ## Reproduce
@@ -18,18 +19,27 @@ Cyber Security case study (Unit 4). The repository holds:
 pip install -r requirements.txt
 scripts/get_data.sh data/mpsd                 # public MPSD corpus (not committed)
 python experiments/run_experiments.py --data data/mpsd
+python experiments/mixed_training.py --data data/mpsd
 python experiments/simulate_response.py --data data/mpsd
+python experiments/error_analysis.py --data data/mpsd
 python experiments/make_figures.py
 python -m pytest -q tests
 
-# report (needs Node.js with the `docx` package, and LibreOffice for PDF)
-node report/build_report.js
-soffice --headless --convert-to pdf --outdir report report/Report.docx
+python report/update_plot_data.py            # only needed if results change
 ```
 
-Before submitting, edit the `META` block at the top of `report/build_report.js`
-(group number, member names, roll numbers, faculty, department), rebuild, and
-rename the PDF to your group number, e.g. `G10.pdf`.
+### Report on Overleaf
+
+Create a blank Overleaf project, replace its `main.tex` with `report/main.tex`
+and compile with pdfLaTeX (the default). No other files are required. Before
+submitting, fill in the group number, member names, roll numbers, faculty,
+department and institute in the title-page block near the top of `main.tex`,
+recompile, and download the PDF named after your group number, e.g. `G10.pdf`.
+
+```bash
+# local build (TeX Live)
+latexmk -pdf -outdir=report report/main.tex
+```
 
 ## Safety notes
 

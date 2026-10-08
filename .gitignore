@@ -2,5 +2,12 @@ data/
 __pycache__/
 *.pyc
 models/*.joblib
-report/node_modules/
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.lof
+report/*.lot
+report/*.fls
+report/*.fdb_latexmk
 results/response_audit.jsonl
