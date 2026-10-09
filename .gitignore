@@ -1,7 +1,6 @@
 data/
 __pycache__/
 *.pyc
-models/*.joblib
 report/*.aux
 report/*.log
 report/*.out
