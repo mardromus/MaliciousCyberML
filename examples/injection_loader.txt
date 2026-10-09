@@ -1,0 +1,3 @@
+# Inert test text for the detector (never run).
+[DllImport("kernel32.dll")] VirtualAlloc CreateThread
+$b=[System.Convert]::FromBase64String($p); [System.Reflection.Assembly]::Load($b)

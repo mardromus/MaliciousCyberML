@@ -1,0 +1,8 @@
+<#
+.SYNOPSIS
+Lists running services (benign administration example).
+#>
+function Get-RunningService {
+    param([string]$Name = '*')
+    Get-Service -Name $Name | Where-Object Status -eq 'Running'
+}

